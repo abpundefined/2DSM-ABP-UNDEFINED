@@ -1,153 +1,243 @@
-# 🚀 2DSM-ABP-UNDEFINED
+<h1>🚀 2DSM-ABP-UNDEFINED</h1>
 
-Este repositório contém o desenvolvimento do projeto interdisciplinar da disciplina de **Aprendizagem Baseada em Problemas (ABP)** do curso de **Desenvolvimento de Software Multiplataforma** da FATEC Jacareí.
+<p>
+Este repositório contém o desenvolvimento do projeto interdisciplinar da disciplina de
+<strong>Aprendizagem Baseada em Problemas (ABP)</strong> do curso de
+<strong>Desenvolvimento de Software Multiplataforma</strong> da FATEC Jacareí.
+</p>
 
----
+<hr>
 
-## 📌 Sumário
-
-- [📖 Sobre o Projeto](#-sobre-o-projeto)
-- [🛠️ Tecnologias Utilizadas](#️-tecnologias-utilizadas)
-- [📑 Requisitos](#-requisitos)
-  - [✅ Requisitos Funcionais](#-requisitos-funcionais)
-  - [⚙️ Requisitos Não Funcionais](#️-requisitos-não-funcionais)
-- [📝 User Stories](#-user-stories)
-- [🧑‍💻 Integrantes](#-integrantes)
-
----
-
-### 🚀 Planejamento de Sprints
----
-<ul>
-  <li><a href="#sprint-1">⏱️ Sprint 1</a>
-      <ul>
-        <li><a href="#backlog-sprint-1">📋 Backlog</a></li>
-        <li><a href="#burndown-sprint-1">📉 Burndown</a></li>
-      </ul>
-    </li>
-  <li><a href="#sprint-2">⏱️ Sprint 2</a>
-      <ul>
-        <li><a href="#backlog-sprint-2">📋 Backlog</a></li>
-        <li><a href="#burndown-sprint-2">📉 Burndown</a></li>
-      </ul>
-    </li>
-  <li><a href="#sprint-3">⏱️ Sprint 3</a>
-      <ul>
-        <li><a href="#backlog-sprint-3">📋 Backlog</a></li>
-        <li><a href="#burndown-sprint-3">📉 Burndown</a></li>
-      </ul>
-    </li>
-</ul>
-
----
-## 📎 Links
+<h2>📌 Sumário</h2>
 
 <ul>
-  <li>
-    <strong>Trello:</strong>
-    <a href="https://trello.com/b/T7wMGhWx/2dsm-abp-undefined" target="_blank">
-      Acessar Trello
-    </a>
-  </li>
-  <li>
-    <strong>Figma:</strong>
-    <a href="" target="_blank">
-      Acessar Figma
-    </a>
-  </li>
-  <li>
-    <strong>Sistema:</strong>
-    <a href="" target="_blank">
-      Acessar sistema
-    </a>
-  </li>
+<li><a href="#sobre">📖 Sobre o Projeto</a></li>
+<li><a href="#tecnologias">🛠️ Tecnologias Utilizadas</a></li>
+<li><a href="#requisitos">📑 Requisitos</a></li>
+<li><a href="#userstories">📝 User Stories</a></li>
+<li><a href="#integrantes">🧑‍💻 Integrantes</a></li>
 </ul>
 
+<hr>
 
-## 📖 Sobre o Projeto
+<h2>🚀 Planejamento de Sprints</h2>
 
-...
----
+<ul>
+<li>
+<a href="#sprint1">⏱️ Sprint 1</a>
+<ul>
+<li><a href="#backlogsprint1">📋 Backlog</a></li>
+<li><a href="#burndownsprint1">📉 Burndown</a></li>
+</ul>
+</li>
 
+<li>
+<a href="#sprint2">⏱️ Sprint 2</a>
+<ul>
+<li><a href="#backlogsprint2">📋 Backlog</a></li>
+<li><a href="#burndownsprint2">📉 Burndown</a></li>
+</ul>
+</li>
 
-## 🛠️ Tecnologias Utilizadas
+<li>
+<a href="#sprint3">⏱️ Sprint 3</a>
+<ul>
+<li><a href="#backlogsprint3">📋 Backlog</a></li>
+<li><a href="#burndownsprint3">📉 Burndown</a></li>
+</ul>
+</li>
+</ul>
 
+<hr>
+
+<h2>📎 Links</h2>
+
+<ul>
+<li>
+<strong>Trello:</strong>
+<a href="https://trello.com/b/T7wMGhWx/2dsm-abp-undefined" target="_blank">
+Acessar Trello
+</a>
+</li>
+
+<li>
+<strong>Figma:</strong>
+<a href="#" target="_blank">
+Acessar Figma
+</a>
+</li>
+
+<li>
+<strong>Sistema:</strong>
+<a href="#" target="_blank">
+Acessar sistema
+</a>
+</li>
+</ul>
+
+<hr>
+
+<h2 id="sobre">📖 Sobre o Projeto</h2>
+
+<p>...</p>
+
+<hr>
+
+<h2 id="tecnologias">🛠️ Tecnologias Utilizadas</h2>
+
+<p>
 O desenvolvimento será realizado com as seguintes tecnologias, visando garantir performance e acessibilidade na aplicação.
+</p>
 
-### 🔧 Stack Principal
-<li> <img src="./public/static/React-icon.svg.png" alt="React" width="20"> React </li>
-<li> <img src="./public/static/ts-logo-128.png" alt="TypeScript" width="20"> TypeScript </li>
-<li> <img src="./public/static/css-3.png" alt="TypeScript" width="20"> CSS </li>
-<li> <img src="./public/static/postgresql.webp" alt="JavaScript" width="20"> PostgreSQL </li>
+<h3>🔧 Stack Principal</h3>
 
----
+<ul>
+<li>
+<img src="./public/static/React-icon.svg.png" alt="React" width="20">
+React
+</li>
 
-## 📑 Requisitos
+<li>
+<img src="./public/static/ts-logo-128.png" alt="TypeScript" width="20">
+TypeScript
+</li>
 
-### ✅ Requisitos Funcionais
+<li>
+<img src="./public/static/css-3.png" alt="CSS" width="20">
+CSS
+</li>
 
-_A definir_
+<li>
+<img src="./public/static/postgresql.webp" alt="PostgreSQL" width="20">
+PostgreSQL
+</li>
+</ul>
 
----
+<hr>
 
-### ⚙️ Requisitos Não Funcionais
+<h2 id="requisitos">📑 Requisitos</h2>
 
-_A definir_
+<h3>✅ Requisitos Funcionais</h3>
 
----
+<p><em>A definir</em></p>
 
-## 📝 User Stories
+<hr>
 
-_A definir_
+<h3>⚙️ Requisitos Não Funcionais</h3>
 
----
+<p><em>A definir</em></p>
 
-## 🚀 Planejamento de Sprints
+<hr>
 
-## ⏱️ Sprint 1
+<h2 id="userstories">📝 User Stories</h2>
 
-### 📋 Backlog Sprint 1
+<p><em>A definir</em></p>
 
-_A definir_
+<hr>
 
-### 📉 Burndown Sprint 1
+<h2>🚀 Planejamento de Sprints</h2>
 
-_A definir_
+<h3 id="sprint1">⏱️ Sprint 1</h3>
 
----
+<h4 id="backlogsprint1">📋 Backlog Sprint 1</h4>
 
-## ⏱️ Sprint 2
+<p><em>A definir</em></p>
 
-### 📋 Backlog Sprint 2
+<h4 id="burndownsprint1">📉 Burndown Sprint 1</h4>
 
-_A definir_
+<p><em>A definir</em></p>
 
-### 📉 Burndown Sprint 2
+<hr>
 
-_A definir_
+<h3 id="sprint2">⏱️ Sprint 2</h3>
 
----
+<h4 id="backlogsprint2">📋 Backlog Sprint 2</h4>
 
-## ⏱️ Sprint 3
+<p><em>A definir</em></p>
 
-### 📋 Backlog Sprint 3
+<h4 id="burndownsprint2">📉 Burndown Sprint 2</h4>
 
-_A definir_
+<p><em>A definir</em></p>
 
-### 📉 Burndown Sprint 3
+<hr>
 
-_A definir_
+<h3 id="sprint3">⏱️ Sprint 3</h3>
 
----
+<h4 id="backlogsprint3">📋 Backlog Sprint 3</h4>
 
-## 🧑‍💻 Integrantes
+<p><em>A definir</em></p>
 
-| Foto | Nome Completo | Papel | LinkedIn | GitHub |
-|------|---------------|--------|----------|--------|
-| <img src="./public/static/undefined/Marcus.jpg" width="80"> | Marcus Vinicius Ribeiro do Nascimento | Product Owner | [LinkedIn](https://www.linkedin.com/in/marcus-nascimento-50a0ba1b5) | [GitHub](https://github.com/MarcusVRDN) |
-| <img src="./public/static/undefined/Pedro.jpg" width="80"> | Pedro Augusto Gomes | Scrum Master | [LinkedIn](https://www.linkedin.com/in/pedro-augusto-gomes) | [GitHub](https://github.com/PedrinhoDBR) |
-| <img src="./public/static/undefined/Israel.jpg" width="80"> | Israel da Silva Lemes | Dev | [LinkedIn](https://www.linkedin.com/in/israel-lemes/) | [GitHub](https://github.com/Israelisl) |
-| <img src="./public/static/undefined/Lorena.jpg" width="80"> | João Paulo Lorena Dias da Silva | Dev | [LinkedIn](https://www.linkedin.com/in/jo%C3%A3o-lorena-056b95271) | [GitHub](https://github.com/Jonnaes) |
-| <img src="./public/static/undefined/Nadla.jpg" width="80"> | Nadla Fernandes Ferreira | Dev | [LinkedIn](https://www.linkedin.com/in/nadla-ferreira-4646433a8/) | [GitHub](https://github.com/NadlaFernandes) |
-| <img src="./public/static/undefined/Rainan.jpg" width="80"> | Rainan de Oliveira Reis | Dev | [LinkedIn](https://www.linkedin.com/in/rainan-reis-757384365/) | [GitHub](https://github.com/RainanKaneka) |
-| <img src="./public/static/undefined/Thales.jpg" width="80"> | Thales Cambraia Dias | Dev | [LinkedIn](https://www.linkedin.com/in/thales-tcd/) | [GitHub](https://github.com/thalestcd) |
+<h4 id="burndownsprint3">📉 Burndown Sprint 3</h4>
+
+<p><em>A definir</em></p>
+
+<hr>
+
+<h2 id="integrantes">🧑‍💻 Integrantes</h2>
+
+<table>
+<tr>
+<th>Foto</th>
+<th>Nome Completo</th>
+<th>Papel</th>
+<th>LinkedIn</th>
+<th>GitHub</th>
+</tr>
+
+<tr>
+<td><img src="./public/static/undefined/Marcus.jpg" width="80"></td>
+<td>Marcus Vinicius Ribeiro do Nascimento</td>
+<td>Product Owner</td>
+<td><a href="https://www.linkedin.com/in/marcus-nascimento-50a0ba1b5">LinkedIn</a></td>
+<td><a href="https://github.com/MarcusVRDN">GitHub</a></td>
+</tr>
+
+<tr>
+<td><img src="./public/static/undefined/Pedro.jpg" width="80"></td>
+<td>Pedro Augusto Gomes</td>
+<td>Scrum Master</td>
+<td><a href="https://www.linkedin.com/in/pedro-augusto-gomes">LinkedIn</a></td>
+<td><a href="https://github.com/PedrinhoDBR">GitHub</a></td>
+</tr>
+
+<tr>
+<td><img src="./public/static/undefined/Israel.jpg" width="80"></td>
+<td>Israel da Silva Lemes</td>
+<td>Dev</td>
+<td><a href="https://www.linkedin.com/in/israel-lemes/">LinkedIn</a></td>
+<td><a href="https://github.com/Israelisl">GitHub</a></td>
+</tr>
+
+<tr>
+<td><img src="./public/static/undefined/Lorena.jpg" width="80"></td>
+<td>João Paulo Lorena Dias da Silva</td>
+<td>Dev</td>
+<td><a href="https://www.linkedin.com/in/jo%C3%A3o-lorena-056b95271">LinkedIn</a></td>
+<td><a href="https://github.com/Jonnaes">GitHub</a></td>
+</tr>
+
+<tr>
+<td><img src="./public/static/undefined/Nadla.jpg" width="80"></td>
+<td>Nadla Fernandes Ferreira</td>
+<td>Dev</td>
+<td><a href="https://www.linkedin.com/in/nadla-ferreira-4646433a8/">LinkedIn</a></td>
+<td><a href="https://github.com/NadlaFernandes">GitHub</a></td>
+</tr>
+
+<tr>
+<td><img src="./public/static/undefined/Rainan.jpg" width="80"></td>
+<td>Rainan de Oliveira Reis</td>
+<td>Dev</td>
+<td><a href="https://www.linkedin.com/in/rainan-reis-757384365/">LinkedIn</a></td>
+<td><a href="https://github.com/RainanKaneka">GitHub</a></td>
+</tr>
+
+<tr>
+<td><img src="./public/static/undefined/Thales.jpg" width="80"></td>
+<td>Thales Cambraia Dias</td>
+<td>Dev</td>
+<td><a href="https://www.linkedin.com/in/thales-tcd/">LinkedIn</a></td>
+<td><a href="https://github.com/thalestcd">GitHub</a></td>
+</tr>
+
+</table>
