@@ -148,6 +148,6 @@ _A definir_
 | <img src="./public/static/undefined/Pedro.jpg" width="80"> | Pedro Augusto Gomes | Scrum Master | [LinkedIn](https://www.linkedin.com/in/pedro-augusto-gomes) | [GitHub](https://github.com/PedrinhoDBR) |
 | <img src="./public/static/undefined/Israel.jpg" width="80"> | Israel da Silva Lemes | Dev | [LinkedIn](https://www.linkedin.com/in/israel-lemes/) | [GitHub](https://github.com/Israelisl) |
 | <img src="./public/static/undefined/Lorena.jpg" width="80"> | João Paulo Lorena Dias da Silva | Dev | [LinkedIn](https://www.linkedin.com/in/jo%C3%A3o-lorena-056b95271) | [GitHub](https://github.com/Jonnaes) |
-| <img src="./public/static/undefined/Nadla.jpg" width="80"> | Nadla | Dev | [LinkedIn](https://www.linkedin.com/in/) | [GitHub](https://github.com/) |
-| — | Rainan de Oliveira Reis | Dev | [LinkedIn](https://www.linkedin.com/in/rainan-reis-757384365/) | [GitHub](https://github.com/RainanKaneka) |
+| <img src="./public/static/undefined/Nadla.jpg" width="80"> | Nadla Fernandes Ferreira | Dev | [LinkedIn](https://www.linkedin.com/in/nadla-ferreira-4646433a8/) | [GitHub](https://github.com/NadlaFernandes) |
+| <img src="./public/static/undefined/Rainan.jpg" width="80"> | Rainan de Oliveira Reis | Dev | [LinkedIn](https://www.linkedin.com/in/rainan-reis-757384365/) | [GitHub](https://github.com/RainanKaneka) |
 | <img src="./public/static/undefined/Thales.jpg" width="80"> | Thales Cambraia Dias | Dev | [LinkedIn](https://www.linkedin.com/in/thales-tcd/) | [GitHub](https://github.com/thalestcd) |
