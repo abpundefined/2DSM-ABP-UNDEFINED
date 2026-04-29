@@ -1,4 +1,6 @@
 import './App.css';
+import './Header.css';
+import './Footer.css';
 import { ChatContainer } from './components/chat/ChatContainer';
 
 /**
