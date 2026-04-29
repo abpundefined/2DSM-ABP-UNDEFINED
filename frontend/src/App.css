@@ -51,9 +51,7 @@ input {
   z-index: 1000;
 }
 
-.divider {
-  height: 80px;
-}
+
 
 h1 {
   color: var(--sd-text);
@@ -147,7 +145,7 @@ h1 {
 }
 
 .sd-chat-card {
-  width: min(100%, 830px);
+  width: min(100%, 1080px);
   background: var(--sd-panel);
   border-radius: var(--sd-radius-xl);
   overflow: hidden;
@@ -228,6 +226,7 @@ h1 {
   background: #dcdcdc;
   min-height: 800px;
   max-height: 800px;
+  
   overflow-y: scroll;
 }
 
@@ -246,7 +245,7 @@ h1 {
   box-shadow: var(--sd-shadow);
   display: grid;
   gap: 10px;
-  font-size: 1rem;
+  font-size: 1.3rem;
 }
 
 .sd-bubble-wide {
@@ -389,8 +388,14 @@ h1 {
 }
 
 .sd-bubble-user{
-  background-color: #999999;
+  background-color: var(--sd-red);
+  color: white;
+  border-radius: 20px 0px 20px 20px;
 
+}
+
+.sd-bubble-bot{
+  border-radius: 0px 20px 20px 20px;
 }
 
 .sd-message-row.user-row {

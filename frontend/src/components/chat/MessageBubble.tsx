@@ -5,7 +5,7 @@ export function MessageBubble({ children, sender }: { children: ReactNode, sende
   return (
     <div className={`sd-message-row ${sender === 'user' ? 'user-row' : ''}`}>
       {/* Aqui você pode incluir o BubbleAvatar depois */}
-      <div className={`sd-bubble ${sender === 'user' ? 'sd-bubble-user' : ''}`}>
+      <div className={`sd-bubble ${sender === 'user' ? 'sd-bubble-user' : 'sd-bubble-bot'}`}>
         {children}
       </div>
     </div>
