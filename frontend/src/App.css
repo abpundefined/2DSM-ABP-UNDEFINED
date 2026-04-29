@@ -398,6 +398,10 @@ h1 {
   border-radius: 0px 20px 20px 20px;
 }
 
+.sd-bubble{
+  font-family: Roboto, sans-serif;
+}
+
 .sd-message-row.user-row {
   flex-direction: row-reverse;
 }
