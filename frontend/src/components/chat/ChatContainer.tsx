@@ -36,6 +36,7 @@ export function ChatContainer() {
       <div className="sd-chip-row">
         <OptionButton label="DSM" onClick={() => handleChoice('DSM')} />
         <OptionButton label="Geoprocessamento" onClick={() => handleChoice('Geoprocessamento')} />
+        <OptionButton label="Meio Ambiente e Recursos Hídricos" onClick={() => handleChoice('Meio Ambiente e Recursos Hídricos')} />
       </div>
     </div>
   );

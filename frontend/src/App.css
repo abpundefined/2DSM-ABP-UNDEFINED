@@ -385,3 +385,12 @@ h1 {
     min-height: 56px;
   }
 }
+
+.sd-bubble-user{
+  background-color: #999999;
+
+}
+
+.sd-message-row.user-row {
+  flex-direction: row-reverse;
+}
