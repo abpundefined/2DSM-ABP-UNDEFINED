@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, type ReactNode } from 'react';
 import { MessageBubble } from './MessageBubble';
 import { OptionButton } from './OptionButton';
 
@@ -6,7 +6,7 @@ import { OptionButton } from './OptionButton';
 type Message = {
     id: number;
     sender: 'bot' | 'user'; // Isso diz ao TS: "Não é qualquer string, são só essas duas"
-    text: string;
+    text: ReactNode;
 }
 export function ChatContainer() {
     const [messages, setMessages] = useState<Message[]>([
@@ -74,7 +74,27 @@ const flow = {
         options: ["Voltar"]
     },
     datas_importantes: {
-        bot: "As datas importantes para o curso de DSM incluem o início e término do semestre, períodos de matrícula, prazos para trancamento de disciplinas, datas de provas e eventos acadêmicos. Recomendo consultar o calendário acadêmico oficial da Fatec Jacareí para obter informações detalhadas e atualizadas sobre essas datas.",
+        bot: (
+      <div>
+        <strong>Calendário Acadêmico 2026-1:</strong>
+        <ul style={{ paddingLeft: '20px', marginTop: '10px', textAlign: 'left' }}>
+          <li><strong>12 a 18/01:</strong> Inscrições para vagas remanescentes e transferências</li>
+          <li><strong>12 a 18/01:</strong> Rematrícula de alunos veteranos</li>
+          <li><strong>09/02:</strong> Início das Aulas</li>
+          <li><strong>19/02:</strong> Prazo para aproveitamento de estudos (Art. 76 – via SIGA)</li>
+          <li><strong>19/02:</strong> Prazo para reconhecimento de competências (Art. 80, §1º):</li>
+          <li><strong>19/02:</strong> Ajustes de matrícula (veteranos – Art. 26, §4º)</li>
+          <li><strong>21/02:</strong> Exame de nivelamento com ajuste de horário (Art. 87, §1º)</li>
+          <li><strong>23/02:</strong> Ajustes de matrícula (ingressantes – Art. 25, §2º)</li>
+          <li><strong>27/02:</strong> Exame de nivelamento com ajuste de horário (Art. 87, §1º)</li>
+          <li><strong>02/03:</strong> Cancelamento por ausência de rematrícula (Art. 28)</li>
+          <li><strong>25/03:</strong> Prazo final para desistência de disciplina (Art. 30)</li>
+          <li><strong>13/05:</strong> Prazo final para trancamento (exceto ingressantes – Art. 31, §3º)</li>
+          <li><strong>27/06:</strong> Término das Aulas</li>
+          <li><strong>06 a 08/07:</strong> Término das Aulas</li>
+        </ul>
+      </div>
+    ),
         options: ["Voltar"]
     },
     grade_curricular: {
@@ -82,7 +102,7 @@ const flow = {
         options: ["Voltar"]
     },
     estagio: {
-        bot: "",
+        bot:"",
         options: ["Voltar"]
     },
     como_ingressar: {

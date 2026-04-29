@@ -226,7 +226,9 @@ h1 {
 .sd-chat-body {
   padding: 24px;
   background: #dcdcdc;
-  min-height: 458px;
+  min-height: 800px;
+  max-height: 800px;
+  overflow-y: scroll;
 }
 
 .sd-message-row {
