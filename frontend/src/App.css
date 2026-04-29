@@ -55,6 +55,10 @@ input {
   height: 80px;
 }
 
+h1 {
+  color: var(--sd-text);
+}
+
 .sd-brand {
   display: flex;
   align-items: stretch;
