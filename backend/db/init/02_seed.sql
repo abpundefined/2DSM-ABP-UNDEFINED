@@ -154,7 +154,7 @@ $$<ul>
 <li>Período de exames finais (Art. 34): 06 a 08/07/2026</li>
 </ul>
 <div>Acesse o calendário com todas as datas importantes para consultar prazos, eventos acadêmicos e períodos letivos completos.
-<a href='/assets/knowledge-base/pdf/Calendario_Academico_2026.pdf' target='_blank'>Abrir Calendário Acadêmico 2026</a>.</div>
+<a href='/assets/pdf/Calendario_Academico_2026.pdf' target='_blank'>Abrir Calendário Acadêmico 2026</a>.</div>
 $$,
 NULL,NULL, 2, TRUE);
 
@@ -193,7 +193,7 @@ $$No curso de DSM, as atividades de extensão estão vinculadas ao ABP e às seg
 <li>Computação em Nuvem II</li>
 </ul>
 <div>Para obter mais orientações sobre as atividades de extensão, consulte o PPC do curso de DSM, nos anexos a partir da página 102.
-<a href='/assets/knowledge-base/pdf/DSM-PPC.pdf' target='_blank'>Abrir PPC do curso</a>.</div>$$,
+<a href='/assets/pdf/DSM-PPC.pdf' target='_blank'>Abrir PPC do curso</a>.</div>$$,
 NULL,NULL, 3, TRUE);
 
 SELECT upsert_navigation_node('dsm', 'Disciplinas remotas', 'dsm-disciplinas-remotas', NULL,
@@ -208,7 +208,7 @@ No 6º semestre:
 </ul>
 <div>As aulas são remotas e síncronas, ou seja, o aluno precisa estar presente no momento em que a aula é ministrada. Não confundir com aulas na modalidade EaD, que são remotas e assíncronas.</div>
 <div>Para obter mais orientações sobre a grade de disciplinas, consulte o PPC do curso de DSM, na página 28.
-<a href='/assets/knowledge-base/pdf/DSM-PPC.pdf' target='_blank'>Abrir PPC do curso</a>.</div>$$,
+<a href='/assets/pdf/DSM-PPC.pdf' target='_blank'>Abrir PPC do curso</a>.</div>$$,
 NULL,NULL, 4, TRUE);
 
 SELECT upsert_navigation_node('dsm', 'Dispensa de disciplinas', 'dsm-dispensa',
@@ -233,32 +233,32 @@ NULL, 7, TRUE);
 SELECT upsert_navigation_node('dsm-horario-aulas', '1º semestre', 'dsm-horario-aulas-1-semestre', NULL,
 $$Horário de aulas do 1º semestre.$$,
 NULL,
-'assets/knowledge-base/png/horario-aula-1dsm.png', 1, TRUE);
+'assets/png/horario-aula-1dsm.png', 1, TRUE);
 
 SELECT upsert_navigation_node('dsm-horario-aulas', '2º semestre', 'dsm-horario-aulas-2-semestre', NULL,
 $$Horário de aulas do 2º semestre.$$,
 NULL,
-'assets/knowledge-base/png/horario-aula-2dsm.png', 2, TRUE);
+'assets/png/horario-aula-2dsm.png', 2, TRUE);
 
 SELECT upsert_navigation_node('dsm-horario-aulas', '3º semestre', 'dsm-horario-aulas-3-semestre', NULL,
 $$Horário de aulas do 3º semestre.$$,
 NULL,
-'assets/knowledge-base/png/horario-aula-3dsm.png', 3, TRUE);
+'assets/png/horario-aula-3dsm.png', 3, TRUE);
 
 SELECT upsert_navigation_node('dsm-horario-aulas', '4º semestre', 'dsm-horario-aulas-4-semestre', NULL,
 $$Horário de aulas do 4º semestre.$$,
 NULL,
-'assets/knowledge-base/png/horario-aula-4dsm.png', 4, TRUE);
+'assets/png/horario-aula-4dsm.png', 4, TRUE);
 
 SELECT upsert_navigation_node('dsm-horario-aulas', '5º semestre', 'dsm-horario-aulas-5-semestre', NULL,
 $$Horário de aulas do 5º semestre.$$,
 NULL,
-'assets/knowledge-base/png/horario-aula-5dsm.png', 5, TRUE);
+'assets/png/horario-aula-5dsm.png', 5, TRUE);
 
 SELECT upsert_navigation_node('dsm-horario-aulas', '6º semestre', 'dsm-horario-aulas-6-semestre', NULL,
 $$Horário de aulas do 6º semestre.$$,
 NULL,
-'assets/knowledge-base/png/horario-aula-6dsm.png', 6, TRUE);
+'assets/png/horario-aula-6dsm.png', 6, TRUE);
 
 SELECT upsert_navigation_node('dsm', 'Portfólio', 'dsm-portfolio', NULL,
 $$O curso não possui Trabalho de Graduação (TG). O TG é substituído pela construção do Portfólio Digital.
@@ -296,7 +296,7 @@ Requisitos:
 <div>Artigo 75 - O aproveitamento de estudos é decorrente da equivalência entre componentes curriculares, cumpridos com aprovação em Instituição de Ensino Superior credenciada e com curso superior de graduação autorizado ou reconhecido na forma da Lei.</div>
 <div>Parágrafo único - Para fins de aproveitamento de estudos, o aluno deve apresentar o histórico escolar, ementas e o programa ou plano de ensino do componentecurricular concluído nos últimos 10 (dez) anos.</div>
 <div>Para obter a descrição completa acessa o restante do texto na página 25 do Regulamento Geral dos Cursos Superiores das Fatecs. 
-<a href='/assets/knowledge-base/pdf/Regulamento_Geral_dos_Cursos.pdf' target='_blank'>Abrir Regulamento Geral</a>.</div>
+<a href='/assets/pdf/Regulamento_Geral_dos_Cursos.pdf' target='_blank'>Abrir Regulamento Geral</a>.</div>
 $$,
 NULL,NULL, 1, TRUE);
 
@@ -307,7 +307,7 @@ $$<div>É possível solicitar reconhecimento de competências adquiridas em curs
 <div>Artigo 79 - É possível realizar reconhecimento de competências adquiridas em cursos técnicos e profissionalizantes de unidades de ensino do CEETEPS, desde que estejam previamente mapeadas e previstas no sistema acadêmico, com especificação dos componentes curriculares passíveis de reconhecimento, valorizando, assim, saberes e conhecimentos adquiridos em outros níveis de ensino, nos termos da legislação vigente.</div>
 <div>Parágrafo único - Fica vedado o reconhecimento de competências em disciplina(s) na(s) qual(is) seja(m) prevista(s) atividade(s) de extensão curricularizadas.</div>
 <div>Para obter a descrição completa acessa o restante do texto na página 27 do Regulamento Geral dos Cursos Superiores das Fatecs. 
-<a href='/assets/knowledge-base/pdf/Regulamento_Geral_dos_Cursos.pdf' target='_blank'>Abrir Regulamento Geral</a>.</div>
+<a href='/assets/pdf/Regulamento_Geral_dos_Cursos.pdf' target='_blank'>Abrir Regulamento Geral</a>.</div>
 $$,
 NULL, NULL, 2, TRUE);
 
@@ -330,7 +330,7 @@ Comprovantes aceitos:
 <div>Artigo 83 - O aproveitamento de conhecimento e experiências anteriores pode ser utilizado para o aluno obter dispensa de disciplinas, exceto àquelas na(s) qual(is) seja(m) prevista(s) atividade(s) de extensão curricularizadas.</div>
 <div>Parágrafo único - Fica vedado o reconhecimento de competências em disciplina(s) na(s) qual(is) seja(m) prevista(s) atividade(s) de extensão curricularizadas.</div>
 <div>Para obter a descrição completa acessa o restante do texto na página 27 do Regulamento Geral dos Cursos Superiores das Fatecs. 
-<a href='/assets/knowledge-base/pdf/Regulamento_Geral_dos_Cursos.pdf' target='_blank'>Abrir Regulamento Geral</a>.</div>
+<a href='/assets/pdf/Regulamento_Geral_dos_Cursos.pdf' target='_blank'>Abrir Regulamento Geral</a>.</div>
 $$,
 NULL, NULL, 3, TRUE);
 
@@ -347,7 +347,7 @@ $$No início do 3º semestre é aplicada a prova de proficiência em Inglês par
 <div>SEÇÃO XII - EXAMES DE NIVELAMENTO E RENDIMENTO DE LÍNGUAS ESTRANGEIRAS</div>
 <div>Artigo 86 - Os exames de nivelamento e rendimento de línguas estrangeiras consistem em avaliação que visa mensurar o conhecimento do aluno em línguas estrangeiras, contemplando leitura, gramática, compreensão auditiva e oralidade.</div>
 <div>Para obter a descrição completa acessa o restante do texto na página 28 do Regulamento Geral dos Cursos Superiores das Fatecs. 
-<a href='/assets/knowledge-base/pdf/Regulamento_Geral_dos_Cursos.pdf' target='_blank'>Abrir Regulamento Geral</a>.</div>
+<a href='/assets/pdf/Regulamento_Geral_dos_Cursos.pdf' target='_blank'>Abrir Regulamento Geral</a>.</div>
 $$,
 NULL, NULL, 4, TRUE);
 
@@ -356,7 +356,7 @@ SELECT upsert_navigation_node('dsm-estagio', 'Duração do estágio supervisiona
 $$<div>Carga horária obrigatória: 240 horas.</div>
 <div>Pode iniciar: a partir do 1º semestre.</div>
 <div>Para obter mais orientações acesse a seção "7.1 Estágio Curricular Supervisionado" do PPC do curso de DSM, na página 93.
-<a href='/assets/knowledge-base/pdf/DSM-PPC.pdf' target='_blank'>Abrir PPC do curso</a>.</div>$$,
+<a href='/assets/pdf/DSM-PPC.pdf' target='_blank'>Abrir PPC do curso</a>.</div>$$,
 NULL,NULL, 1, TRUE);
 
 SELECT upsert_navigation_node('dsm-estagio', 'Início do estágio', 'dsm-estagio-inicio', NULL,
@@ -367,7 +367,7 @@ NULL,NULL, 2, TRUE);
 SELECT upsert_navigation_node('dsm-estagio', 'Comprovação', 'dsm-estagio-comprovacao', NULL,
 $$<div>Após concluir as 240 horas de estágio, o aluno deve elaborar o Relatório Final de Estágio, que deverá ser assinado pelo supervisor e encaminhado ao Professor Orientador.</div>
 <div>As orientações sobre os documentos a serem apresentados constam no Manual de Orientações de Estágio Supervisionado. O modelo do Relatório Final de Estágio está no Anexo F, e o formulário de Avaliação de Estágio está no Anexo G.
-<a href="/assets/knowledge-base/pdf/Manual_de_orientacoes_de_Estagio_Supervisionado.pdf" target="_blank">Abrir Manual de Orientações de Estágio Supervisionado</a>.
+<a href="/assets/pdf/Manual_de_orientacoes_de_Estagio_Supervisionado.pdf" target="_blank">Abrir Manual de Orientações de Estágio Supervisionado</a>.
 </div>
 $$,
 NULL,NULL, 3, TRUE);
@@ -381,7 +381,7 @@ $$<div>O estágio pode ser comprovado por meio das seguintes modalidades:</div>
 </ul>
 <div>
 As orientações sobre os documentos a serem apresentados constam no Manual de Orientações de Estágio Supervisionado. Os modelos de Relatório Final de Estágio compatíveis com cada modalidade estão disponíveis nos anexos do referido manual.
-<a href="/assets/knowledge-base/pdf/Manual_de_orientacoes_de_Estagio_Supervisionado.pdf" target="_blank">Abrir Manual de Orientações de Estágio Supervisionado</a>.
+<a href="/assets/pdf/Manual_de_orientacoes_de_Estagio_Supervisionado.pdf" target="_blank">Abrir Manual de Orientações de Estágio Supervisionado</a>.
 </div>$$,
 NULL,NULL, 4, TRUE);
 
@@ -390,7 +390,7 @@ SELECT upsert_navigation_node('geo', 'Atividades Complementares (AACC)', 'geo-aa
 $$<div>É necessário cumprir 60 horas de Atividades Acadêmico Científico Culturais (AACC).</div>
 <div>O aluno poderá utilizar cursos extracurriculares, cursos de inglês, leitura de livros, participação em feiras como a FEITEC, visitas a museus e exposições, teatro e cinema, trabalho voluntário, visitas técnicas etc.</div>
 <div>Para mais detalhes acesso o PPC do curso de Geoprocessamento, na página 11.
-<a href="/assets/knowledge-base/pdf/Geo-PPC.pdf" target="_blank">Abrir PPC do curso</a>.
+<a href="/assets/pdf/Geo-PPC.pdf" target="_blank">Abrir PPC do curso</a>.
 </div>
 $$,
 NULL,NULL, 1, TRUE);
@@ -413,7 +413,7 @@ $$<ul>
 <li>Período de exames finais (Art. 34): 06 a 08/07/2026</li>
 </ul>
 <div>Acesse o calendário com todas as datas importantes para consultar prazos, eventos acadêmicos e períodos letivos completos.
-<a href='/assets/knowledge-base/pdf/Calendario_Academico_2026.pdf' target='_blank'>Abrir Calendário Acadêmico 2026</a>.</div>
+<a href='/assets/pdf/Calendario_Academico_2026.pdf' target='_blank'>Abrir Calendário Acadêmico 2026</a>.</div>
 $$,
 NULL,NULL, 2, TRUE);
 
@@ -443,17 +443,17 @@ NULL, 6, TRUE);
 SELECT upsert_navigation_node('geo-horario-aulas', '1º semestre', 'geo-horario-aulas-1-semestre', NULL,
 NULL,
 NULL,
-'assets/knowledge-base/png/horario-aula-1geo.png', 1, TRUE);
+'assets/png/horario-aula-1geo.png', 1, TRUE);
 
 SELECT upsert_navigation_node('geo-horario-aulas', '2º semestre', 'geo-horario-aulas-2-semestre', NULL,
 NULL,
 NULL,
-'assets/knowledge-base/png/horario-aula-2geo.png', 2, TRUE);
+'assets/png/horario-aula-2geo.png', 2, TRUE);
 
 SELECT upsert_navigation_node('geo-horario-aulas', '3º semestre', 'geo-horario-aulas-3-semestre', NULL,
 NULL,
 NULL,
-'assets/knowledge-base/png/horario-aula-3geo.png', 3, TRUE);
+'assets/png/horario-aula-3geo.png', 3, TRUE);
 
 SELECT upsert_navigation_node('geo-horario-aulas', '4º semestre', 'geo-horario-aulas-4-semestre', NULL,
 $$O 4º semestre não está sendo oferecido$$,
@@ -463,7 +463,7 @@ NULL, 4, TRUE);
 SELECT upsert_navigation_node('geo-horario-aulas', '5º semestre', 'geo-horario-aulas-5-semestre', NULL,
 NULL,
 NULL,
-'assets/knowledge-base/png/horario-aula-5geo.png', 5, TRUE);
+'assets/png/horario-aula-5geo.png', 5, TRUE);
 
 SELECT upsert_navigation_node('geo-horario-aulas', '6º semestre', 'geo-horario-aulas-6-semestre', NULL,
 $$O 6º semestre não está sendo oferecido$$,
@@ -504,7 +504,7 @@ Requisitos:
 <div>Artigo 75 - O aproveitamento de estudos é decorrente da equivalência entre componentes curriculares, cumpridos com aprovação em Instituição de Ensino Superior credenciada e com curso superior de graduação autorizado ou reconhecido na forma da Lei.</div>
 <div>Parágrafo único - Para fins de aproveitamento de estudos, o aluno deve apresentar o histórico escolar, ementas e o programa ou plano de ensino do componentecurricular concluído nos últimos 10 (dez) anos.</div>
 <div>Para obter a descrição completa acessa o restante do texto na página 25 do Regulamento Geral dos Cursos Superiores das Fatecs. 
-<a href='/assets/knowledge-base/pdf/Regulamento_Geral_dos_Cursos.pdf' target='_blank'>Abrir Regulamento Geral</a>.</div>
+<a href='/assets/pdf/Regulamento_Geral_dos_Cursos.pdf' target='_blank'>Abrir Regulamento Geral</a>.</div>
 $$,
 NULL,NULL, 1, TRUE);
 
@@ -515,7 +515,7 @@ $$<div>É possível solicitar reconhecimento de competências adquiridas em curs
 <div>Artigo 79 - É possível realizar reconhecimento de competências adquiridas em cursos técnicos e profissionalizantes de unidades de ensino do CEETEPS, desde que estejam previamente mapeadas e previstas no sistema acadêmico, com especificação dos componentes curriculares passíveis de reconhecimento, valorizando, assim, saberes e conhecimentos adquiridos em outros níveis de ensino, nos termos da legislação vigente.</div>
 <div>Parágrafo único - Fica vedado o reconhecimento de competências em disciplina(s) na(s) qual(is) seja(m) prevista(s) atividade(s) de extensão curricularizadas.</div>
 <div>Para obter a descrição completa acessa o restante do texto na página 27 do Regulamento Geral dos Cursos Superiores das Fatecs. 
-<a href='/assets/knowledge-base/pdf/Regulamento_Geral_dos_Cursos.pdf' target='_blank'>Abrir Regulamento Geral</a>.</div>
+<a href='/assets/pdf/Regulamento_Geral_dos_Cursos.pdf' target='_blank'>Abrir Regulamento Geral</a>.</div>
 $$,
 NULL, NULL, 2, TRUE);
 
@@ -538,7 +538,7 @@ Comprovantes aceitos:
 <div>Artigo 83 - O aproveitamento de conhecimento e experiências anteriores pode ser utilizado para o aluno obter dispensa de disciplinas, exceto àquelas na(s) qual(is) seja(m) prevista(s) atividade(s) de extensão curricularizadas.</div>
 <div>Parágrafo único - Fica vedado o reconhecimento de competências em disciplina(s) na(s) qual(is) seja(m) prevista(s) atividade(s) de extensão curricularizadas.</div>
 <div>Para obter a descrição completa acessa o restante do texto na página 27 do Regulamento Geral dos Cursos Superiores das Fatecs. 
-<a href='/assets/knowledge-base/pdf/Regulamento_Geral_dos_Cursos.pdf' target='_blank'>Abrir Regulamento Geral</a>.</div>
+<a href='/assets/pdf/Regulamento_Geral_dos_Cursos.pdf' target='_blank'>Abrir Regulamento Geral</a>.</div>
 $$,
 NULL, NULL, 3, TRUE);
 
@@ -555,7 +555,7 @@ $$No início do 1º semestre é aplicada a prova de proficiência em Inglês par
 <div>SEÇÃO XII - EXAMES DE NIVELAMENTO E RENDIMENTO DE LÍNGUAS ESTRANGEIRAS</div>
 <div>Artigo 86 - Os exames de nivelamento e rendimento de línguas estrangeiras consistem em avaliação que visa mensurar o conhecimento do aluno em línguas estrangeiras, contemplando leitura, gramática, compreensão auditiva e oralidade.</div>
 <div>Para obter a descrição completa acessa o restante do texto na página 28 do Regulamento Geral dos Cursos Superiores das Fatecs. 
-<a href='/assets/knowledge-base/pdf/Regulamento_Geral_dos_Cursos.pdf' target='_blank'>Abrir Regulamento Geral</a>.</div>
+<a href='/assets/pdf/Regulamento_Geral_dos_Cursos.pdf' target='_blank'>Abrir Regulamento Geral</a>.</div>
 $$,
 NULL, NULL, 4, TRUE);
 
@@ -564,7 +564,7 @@ SELECT upsert_navigation_node('geo-estagio', 'Duração do estágio supervisiona
 $$<div>Carga horária obrigatória: 180 horas.</div>
 <div>Pode iniciar: a partir do 4º semestre.</div>
 <div>Para obter mais orientações acesse a seção "12.1 Estágio" do PPC do curso de Geoprocessameto, na página 40.
-<a href='/assets/knowledge-base/pdf/Geo-PPC.pdf' target='_blank'>Abrir PPC do curso</a>.</div>$$,
+<a href='/assets/pdf/Geo-PPC.pdf' target='_blank'>Abrir PPC do curso</a>.</div>$$,
 NULL,NULL, 1, TRUE);
 
 SELECT upsert_navigation_node('geo-estagio', 'Início do estágio', 'geo-estagio-inicio', NULL,
@@ -575,7 +575,7 @@ NULL,NULL, 2, TRUE);
 SELECT upsert_navigation_node('geo-estagio', 'Comprovação', 'geo-estagio-comprovacao', NULL,
 $$<div>Após concluir as 180 horas de estágio, o aluno deve elaborar o Relatório Final de Estágio, que deverá ser assinado pelo supervisor e encaminhado ao Professor Orientador.</div>
 <div>As orientações sobre os documentos a serem apresentados constam no Manual de Orientações de Estágio Supervisionado. O modelo do Relatório Final de Estágio está no Anexo F, e o formulário de Avaliação de Estágio está no Anexo G.
-<a href="/assets/knowledge-base/pdf/Manual_de_orientacoes_de_Estagio_Supervisionado.pdf" target="_blank">Abrir Manual de Orientações de Estágio Supervisionado</a>.
+<a href="/assets/pdf/Manual_de_orientacoes_de_Estagio_Supervisionado.pdf" target="_blank">Abrir Manual de Orientações de Estágio Supervisionado</a>.
 </div>
 $$,
 NULL,NULL, 3, TRUE);
@@ -589,7 +589,7 @@ $$<div>O estágio pode ser comprovado por meio das seguintes modalidades:</div>
 </ul>
 <div>
 As orientações sobre os documentos a serem apresentados constam no Manual de Orientações de Estágio Supervisionado. Os modelos de Relatório Final de Estágio compatíveis com cada modalidade estão disponíveis nos anexos do referido manual.
-<a href="/assets/knowledge-base/pdf/Manual_de_orientacoes_de_Estagio_Supervisionado.pdf" target="_blank">Abrir Manual de Orientações de Estágio Supervisionado</a>.
+<a href="/assets/pdf/Manual_de_orientacoes_de_Estagio_Supervisionado.pdf" target="_blank">Abrir Manual de Orientações de Estágio Supervisionado</a>.
 </div>$$,
 NULL,NULL, 4, TRUE);
 
@@ -598,7 +598,7 @@ SELECT upsert_navigation_node('marh', 'Atividades Complementares (AACC)', 'marh-
 $$<div>É necessário cumprir 60 horas de Atividades Acadêmico Científico Culturais (AACC).</div>
 <div>O aluno poderá utilizar cursos extracurriculares, cursos de inglês, leitura de livros, participação em feiras como a FEITEC, visitas a museus e exposições, teatro e cinema, trabalho voluntário, visitas técnicas etc.</div>
 <div>Para mais detalhes acesso o PPC do curso de MARH, na página 11.
-<a href="/assets/knowledge-base/pdf/MARH-PPC.pdf" target="_blank">Abrir PPC do curso</a>.
+<a href="/assets/pdf/MARH-PPC.pdf" target="_blank">Abrir PPC do curso</a>.
 </div>
 $$,
 NULL,NULL, 1, TRUE);
@@ -621,7 +621,7 @@ $$<ul>
 <li>Período de exames finais (Art. 34): 06 a 08/07/2026</li>
 </ul>
 <div>Acesse o calendário com todas as datas importantes para consultar prazos, eventos acadêmicos e períodos letivos completos.
-<a href='/assets/knowledge-base/pdf/Calendario_Academico_2026.pdf' target='_blank'>Abrir Calendário Acadêmico 2026</a>.</div>
+<a href='/assets/pdf/Calendario_Academico_2026.pdf' target='_blank'>Abrir Calendário Acadêmico 2026</a>.</div>
 $$,
 NULL,NULL, 2, TRUE);
 
@@ -632,7 +632,7 @@ No 6º semestre:
 <ul><li>Todas as disciplinas são remotas.</li></ul>
 <div>As aulas são remotas e síncronas, ou seja, o aluno precisa estar presente no momento em que a aula é ministrada. Não confundir com aulas na modalidade EaD, que são remotas e assíncronas.</div>
 <div>Para obter mais orientações sobre a grade de disciplinas, consulte o PPC do curso de MARH, na página 24.
-<a href='/assets/knowledge-base/pdf/MARH-PPC.pdf' target='_blank'>Abrir PPC do curso</a>.</div>$$,
+<a href='/assets/pdf/MARH-PPC.pdf' target='_blank'>Abrir PPC do curso</a>.</div>$$,
 NULL,NULL, 3, TRUE);
 
 SELECT upsert_navigation_node('marh', 'Dispensa de disciplinas', 'marh-dispensa',
@@ -657,27 +657,27 @@ NULL, 6, TRUE);
 SELECT upsert_navigation_node('marh-horario-aulas', '1º semestre', 'marh-horario-aulas-1-semestre', NULL,
 NULL,
 NULL,
-'assets/knowledge-base/png/horario-aula-1marh.png', 1, TRUE);
+'assets/png/horario-aula-1marh.png', 1, TRUE);
 
 SELECT upsert_navigation_node('marh-horario-aulas', '2º semestre', 'marh-horario-aulas-2-semestre', NULL,
 NULL,
 NULL,
-'assets/knowledge-base/png/horario-aula-2marh.png', 2, TRUE);
+'assets/png/horario-aula-2marh.png', 2, TRUE);
 
 SELECT upsert_navigation_node('marh-horario-aulas', '3º semestre', 'marh-horario-aulas-3-semestre', NULL,
 NULL,
 NULL,
-'assets/knowledge-base/png/horario-aula-3marh.png', 3, TRUE);
+'assets/png/horario-aula-3marh.png', 3, TRUE);
 
 SELECT upsert_navigation_node('marh-horario-aulas', '4º semestre', 'marh-horario-aulas-4-semestre', NULL,
 NULL,
 NULL,
-'assets/knowledge-base/png/horario-aula-4marh.png', 4, TRUE);
+'assets/png/horario-aula-4marh.png', 4, TRUE);
 
 SELECT upsert_navigation_node('marh-horario-aulas', '5º semestre', 'marh-horario-aulas-5-semestre', NULL,
 NULL,
 NULL,
-'assets/knowledge-base/png/horario-aula-5marh.png', 5, TRUE);
+'assets/png/horario-aula-5marh.png', 5, TRUE);
 
 SELECT upsert_navigation_node('marh-horario-aulas', '6º semestre', 'marh-horario-aulas-6-semestre', NULL,
 $$O 6º semestre não está sendo oferecido$$,
@@ -718,7 +718,7 @@ Requisitos:
 <div>Artigo 75 - O aproveitamento de estudos é decorrente da equivalência entre componentes curriculares, cumpridos com aprovação em Instituição de Ensino Superior credenciada e com curso superior de graduação autorizado ou reconhecido na forma da Lei.</div>
 <div>Parágrafo único - Para fins de aproveitamento de estudos, o aluno deve apresentar o histórico escolar, ementas e o programa ou plano de ensino do componentecurricular concluído nos últimos 10 (dez) anos.</div>
 <div>Para obter a descrição completa acessa o restante do texto na página 25 do Regulamento Geral dos Cursos Superiores das Fatecs. 
-<a href='/assets/knowledge-base/pdf/Regulamento_Geral_dos_Cursos.pdf' target='_blank'>Abrir Regulamento Geral</a>.</div>
+<a href='/assets/pdf/Regulamento_Geral_dos_Cursos.pdf' target='_blank'>Abrir Regulamento Geral</a>.</div>
 $$,
 NULL,NULL, 1, TRUE);
 
@@ -729,7 +729,7 @@ $$<div>É possível solicitar reconhecimento de competências adquiridas em curs
 <div>Artigo 79 - É possível realizar reconhecimento de competências adquiridas em cursos técnicos e profissionalizantes de unidades de ensino do CEETEPS, desde que estejam previamente mapeadas e previstas no sistema acadêmico, com especificação dos componentes curriculares passíveis de reconhecimento, valorizando, assim, saberes e conhecimentos adquiridos em outros níveis de ensino, nos termos da legislação vigente.</div>
 <div>Parágrafo único - Fica vedado o reconhecimento de competências em disciplina(s) na(s) qual(is) seja(m) prevista(s) atividade(s) de extensão curricularizadas.</div>
 <div>Para obter a descrição completa acessa o restante do texto na página 27 do Regulamento Geral dos Cursos Superiores das Fatecs. 
-<a href='/assets/knowledge-base/pdf/Regulamento_Geral_dos_Cursos.pdf' target='_blank'>Abrir Regulamento Geral</a>.</div>
+<a href='/assets/pdf/Regulamento_Geral_dos_Cursos.pdf' target='_blank'>Abrir Regulamento Geral</a>.</div>
 $$,
 NULL, NULL, 2, TRUE);
 
@@ -752,7 +752,7 @@ Comprovantes aceitos:
 <div>Artigo 83 - O aproveitamento de conhecimento e experiências anteriores pode ser utilizado para o aluno obter dispensa de disciplinas, exceto àquelas na(s) qual(is) seja(m) prevista(s) atividade(s) de extensão curricularizadas.</div>
 <div>Parágrafo único - Fica vedado o reconhecimento de competências em disciplina(s) na(s) qual(is) seja(m) prevista(s) atividade(s) de extensão curricularizadas.</div>
 <div>Para obter a descrição completa acessa o restante do texto na página 27 do Regulamento Geral dos Cursos Superiores das Fatecs. 
-<a href='/assets/knowledge-base/pdf/Regulamento_Geral_dos_Cursos.pdf' target='_blank'>Abrir Regulamento Geral</a>.</div>
+<a href='/assets/pdf/Regulamento_Geral_dos_Cursos.pdf' target='_blank'>Abrir Regulamento Geral</a>.</div>
 $$,
 NULL, NULL, 3, TRUE);
 
@@ -769,7 +769,7 @@ $$No início do 1º semestre é aplicada a prova de proficiência em Inglês par
 <div>SEÇÃO XII - EXAMES DE NIVELAMENTO E RENDIMENTO DE LÍNGUAS ESTRANGEIRAS</div>
 <div>Artigo 86 - Os exames de nivelamento e rendimento de línguas estrangeiras consistem em avaliação que visa mensurar o conhecimento do aluno em línguas estrangeiras, contemplando leitura, gramática, compreensão auditiva e oralidade.</div>
 <div>Para obter a descrição completa acessa o restante do texto na página 28 do Regulamento Geral dos Cursos Superiores das Fatecs. 
-<a href='/assets/knowledge-base/pdf/Regulamento_Geral_dos_Cursos.pdf' target='_blank'>Abrir Regulamento Geral</a>.</div>
+<a href='/assets/pdf/Regulamento_Geral_dos_Cursos.pdf' target='_blank'>Abrir Regulamento Geral</a>.</div>
 $$,
 NULL, NULL, 4, TRUE);
 
@@ -778,7 +778,7 @@ SELECT upsert_navigation_node('marh-estagio', 'Duração do estágio supervision
 $$<div>Carga horária obrigatória: 180 horas.</div>
 <div>Pode iniciar: a partir do 4º semestre.</div>
 <div>Para obter mais orientações acesse a seção "7.2 Estágio Curricular Supervisionado" do PPC do curso de MARH, na página 89.
-<a href='/assets/knowledge-base/pdf/MARH-PPC.pdf' target='_blank'>Abrir PPC do curso</a>.</div>$$,
+<a href='/assets/pdf/MARH-PPC.pdf' target='_blank'>Abrir PPC do curso</a>.</div>$$,
 NULL,NULL, 1, TRUE);
 
 SELECT upsert_navigation_node('marh-estagio', 'Início do estágio', 'marh-estagio-inicio', NULL,
@@ -789,7 +789,7 @@ NULL,NULL, 2, TRUE);
 SELECT upsert_navigation_node('marh-estagio', 'Comprovação', 'marh-estagio-comprovacao', NULL,
 $$<div>Após concluir as 180 horas de estágio, o aluno deve elaborar o Relatório Final de Estágio, que deverá ser assinado pelo supervisor e encaminhado ao Professor Orientador.</div>
 <div>As orientações sobre os documentos a serem apresentados constam no Manual de Orientações de Estágio Supervisionado. O modelo do Relatório Final de Estágio está no Anexo F, e o formulário de Avaliação de Estágio está no Anexo G.
-<a href="/assets/knowledge-base/pdf/Manual_de_orientacoes_de_Estagio_Supervisionado.pdf" target="_blank">Abrir Manual de Orientações de Estágio Supervisionado</a>.
+<a href="/assets/pdf/Manual_de_orientacoes_de_Estagio_Supervisionado.pdf" target="_blank">Abrir Manual de Orientações de Estágio Supervisionado</a>.
 </div>
 $$,
 NULL,NULL, 3, TRUE);
@@ -803,7 +803,7 @@ $$<div>O estágio pode ser comprovado por meio das seguintes modalidades:</div>
 </ul>
 <div>
 As orientações sobre os documentos a serem apresentados constam no Manual de Orientações de Estágio Supervisionado. Os modelos de Relatório Final de Estágio compatíveis com cada modalidade estão disponíveis nos anexos do referido manual.
-<a href="/assets/knowledge-base/pdf/Manual_de_orientacoes_de_Estagio_Supervisionado.pdf" target="_blank">Abrir Manual de Orientações de Estágio Supervisionado</a>.
+<a href="/assets/pdf/Manual_de_orientacoes_de_Estagio_Supervisionado.pdf" target="_blank">Abrir Manual de Orientações de Estágio Supervisionado</a>.
 </div>$$,
 NULL,NULL, 4, TRUE);
 

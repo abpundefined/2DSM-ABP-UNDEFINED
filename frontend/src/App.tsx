@@ -3,18 +3,12 @@ import './Header.css';
 import './Footer.css';
 import { ChatContainer } from './components/chat/ChatContainer';
 
-/**
- * Componente Principal (App)
- * Responsável por estruturar o layout global da página (Topbar e Shell).
- */
 export function App() {
   return (
     <div className="sd-page">
-      {/* 1. TOPBAR: Mantemos a identidade visual da Fatec Jacareí [cite: 5, 42] */}
       <header className="sd-topbar">
         <div className="sd-brand">
           <div className="sd-logo-card">
-            {/* Certifique-se de que o caminho da imagem está correto no seu projeto */}
             <img src="/src/assets/fatec_jacarei-removebg-preview.png" alt="Logo Fatec Jacareí" />
           </div>
         </div>
@@ -30,14 +24,9 @@ export function App() {
       </header>
 
       <div className='divider'></div>
-
-      {/* 2. MAIN SHELL: Onde o conteúdo principal reside */}
       <main className="sd-shell">
         <section className="sd-chat-card">
-          
-          {/* Cabeçalho do Chat: Título e Descrição conforme o Desafio [cite: 182, 184] */}
           <div className="sd-chat-header">
-            {/* O Avatar pode ser um componente separado ou apenas CSS */}
             <div className="sd-avatar sd-avatar-bot">
               <div className="sd-bot-icon" />
             </div>
@@ -47,8 +36,6 @@ export function App() {
             </div>
           </div>
 
-          {/* 3. CHAT CONTAINER: Aqui é onde a mágica funcional acontece! 
-              Toda a lógica de mensagens e botões agora vive aqui dentro. */}
           <ChatContainer />
 
         </section>
