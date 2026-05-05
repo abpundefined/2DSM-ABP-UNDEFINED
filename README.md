@@ -62,7 +62,7 @@ Acessar Trello
 
 <li>
 <strong>Figma:</strong>
-<a href="#" target="_blank">
+<a href="https://www.figma.com/design/OK2prSv5yx73jHEhxO9pOu/ABP-2026---1?node-id=0-1&t=8MzKwBBqUopxgXZS-1" target="_blank">
 Acessar Figma
 </a>
 </li>
@@ -74,12 +74,6 @@ Acessar sistema
 </a>
 </li>
 </ul>
-
-<hr>
-
-<h2 id="sobre">📖 Sobre o Projeto</h2>
-
-<p>...</p>
 
 <hr>
 

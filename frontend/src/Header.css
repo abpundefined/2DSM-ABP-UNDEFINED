@@ -1,0 +1,49 @@
+.header {
+  background-color: #d60000;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.logo-fatec {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+}
+
+.logo-fatec span {
+  font-size: 12px;
+}
+
+.logo-cps {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+}
+
+.header-right input {
+  padding: 8px;
+  border-radius: 20px 0 0 20px;
+  border: none;
+  outline: none;
+}
+
+.header-right button {
+  padding: 8px 12px;
+  border: none;
+  background: white;
+  border-radius: 0 20px 20px 0;
+  cursor: pointer;
+}
