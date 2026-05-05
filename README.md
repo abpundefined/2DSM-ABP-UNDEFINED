@@ -67,12 +67,6 @@ Acessar Figma
 </a>
 </li>
 
-<li>
-<strong>Sistema:</strong>
-<a href="#" target="_blank">
-Acessar sistema
-</a>
-</li>
 </ul>
 
 <hr>
@@ -380,23 +374,505 @@ PostgreSQL
 
 <h2>🚀 Planejamento de Sprints</h2>
 
-<h3 id="sprint1">⏱️ Sprint 1</h3>
+<h3 id="sprint1">⏱️ Sprint 1 — Navegação Inteligente e Estrutura Inicial 🥇</h3>
 
 <h4 id="backlogsprint1">📋 Backlog Sprint 1</h4>
 
-<p><em>A definir</em></p>
+<table>
+<tr>
+<th>ID</th>
+<th>Nome</th>
+<th>Pontos</th>
+<th>Status</th>
+<th>Requisitos Atendidos</th>
+</tr>
+
+<!-- Levantamento e Modelagem -->
+<tr>
+<td colspan="6"><strong>📖 Levantamento e Modelagem</strong></td>
+</tr>
+
+<tr>
+<td>1</td>
+<td>Elicitação de requisitos</td>
+<td>5</td>
+
+<td>✅</td>
+<td>RF01, RF02, RF03</td>
+</tr>
+
+<tr>
+<td>2</td>
+<td>Definição do fluxo inicial do chatbot</td>
+<td>3</td>
+
+<td>✅</td>
+<td>RF01</td>
+</tr>
+
+<tr>
+<td>3</td>
+<td>Criação do Diagrama de Casos de Uso</td>
+<td>3</td>
+
+<td>✅</td>
+<td>RNF10</td>
+</tr>
+
+<!-- Frontend Inicial -->
+<tr>
+<td colspan="6"><strong>🎨 Frontend Inicial</strong></td>
+</tr>
+
+<tr>
+<td>4</td>
+<td>Criar projeto com Vite</td>
+<td>1</td>
+
+<td>✅</td>
+<td>RP01</td>
+</tr>
+
+<tr>
+<td>5</td>
+<td>Organizar estrutura de pastas</td>
+<td>1</td>
+
+<td>✅</td>
+<td>RP01</td>
+</tr>
+
+<tr>
+<td>6</td>
+<td>Rodar projeto localmente</td>
+<td>1</td>
+
+<td>✅</td>
+<td>RP01</td>
+</tr>
+
+<tr>
+<td>7</td>
+<td>Criar componente principal ChatContainer</td>
+<td>3</td>
+
+<td>✅</td>
+<td>RF01, RNF01</td>
+</tr>
+
+<tr>
+<td>8</td>
+<td>Criar área de mensagens</td>
+<td>2</td>
+
+<td>✅</td>
+<td>RF01, RNF01</td>
+</tr>
+
+<tr>
+<td>9</td>
+<td>Criar área de opções/botões</td>
+<td>2</td>
+
+<td>✅</td>
+<td>RF01, RNF01</td>
+</tr>
+
+<tr>
+<td>10</td>
+<td>Criar componente Message</td>
+<td>2</td>
+
+<td>✅</td>
+<td>RF01</td>
+</tr>
+
+<tr>
+<td>11</td>
+<td>Criar componente OptionButton</td>
+<td>2</td>
+
+<td>✅</td>
+<td>RF01</td>
+</tr>
+
+<tr>
+<td>12</td>
+<td>Criar componente Chat</td>
+<td>2</td>
+
+<td>✅</td>
+<td>RF01</td>
+</tr>
+
+<tr>
+<td>13</td>
+<td>Implementar useState para mensagens</td>
+<td>2</td>
+
+<td>✅</td>
+<td>RF01</td>
+</tr>
+
+<tr>
+<td>14</td>
+<td>Implementar useState para opções</td>
+<td>2</td>
+
+<td>✅</td>
+<td>RF01</td>
+</tr>
+
+<tr>
+<td>15</td>
+<td>Implementar exibição do histórico</td>
+<td>2</td>
+
+<td>✅</td>
+<td>RF01, RF08</td>
+</tr>
+
+<tr>
+<td>16</td>
+<td>Melhorar layout institucional</td>
+<td>3</td>
+
+<td>✅</td>
+<td>RNF01</td>
+</tr>
+
+<!-- Backend de Navegação -->
+<tr>
+<td colspan="6"><strong>🔙 Backend de Navegação</strong></td>
+</tr>
+
+<tr>
+<td>17</td>
+<td>Criar rota GET /menus</td>
+<td>2</td>
+
+<td>✅</td>
+<td>RF01</td>
+</tr>
+
+<tr>
+<td>18</td>
+<td>Criar rota GET /submenus</td>
+<td>2</td>
+
+<td>✅</td>
+<td>RF01</td>
+</tr>
+
+<tr>
+<td>19</td>
+<td>Receber slug/input no backend</td>
+<td>2</td>
+
+<td>✅</td>
+<td>RF01</td>
+</tr>
+
+<tr>
+<td>20</td>
+<td>Buscar nó de navegação no banco</td>
+<td>3</td>
+
+<td>✅</td>
+<td>RF01, RF02</td>
+</tr>
+
+<tr>
+<td>21</td>
+<td>Retornar resposta e opções ao frontend</td>
+<td>2</td>
+
+<td>✅</td>
+<td>RF01, RF02</td>
+</tr>
+
+<tr>
+<td>22</td>
+<td>Tratar rota "não encontrada"</td>
+<td>1</td>
+
+<td>✅</td>
+<td>RF01</td>
+</tr>
+
+<tr>
+<td>23</td>
+<td>Rodar scripts do banco de dados</td>
+<td>2</td>
+
+<td>✅</td>
+<td>RF02, RP03</td>
+</tr>
+
+<tr>
+<td>24</td>
+<td>Validar tabelas do banco</td>
+<td>1</td>
+
+<td>✅</td>
+<td>RF02, RP03</td>
+</tr>
+
+<tr>
+<td>25</td>
+<td>Testar conexão com banco</td>
+<td>1</td>
+
+<td>✅</td>
+<td>RF02, RP03</td>
+</tr>
+
+<!-- Integração Front + Back -->
+<tr>
+<td colspan="6"><strong>🔗 Integração Front + Back</strong></td>
+</tr>
+
+<tr>
+<td>26</td>
+<td>Criar service de API no frontend</td>
+<td>2</td>
+
+<td>✅</td>
+<td>RF01</td>
+</tr>
+
+<tr>
+<td>27</td>
+<td>Chamar endpoint do backend via frontend</td>
+<td>2</td>
+
+<td>✅</td>
+<td>RF01</td>
+</tr>
+
+<tr>
+<td>28</td>
+<td>Atualizar estado com resposta da API</td>
+<td>2</td>
+
+<td>✅</td>
+<td>RF01</td>
+</tr>
+
+<tr>
+<td>29</td>
+<td>Tratar erros simples de integração</td>
+<td>1</td>
+
+<td>✅</td>
+<td>RF01</td>
+</tr>
+
+<tr>
+<td>30</td>
+<td>Integrar árvore de navegação com frontend</td>
+<td>3</td>
+
+<td>✅</td>
+<td>RF01, RF02</td>
+</tr>
+
+<tr>
+<td>31</td>
+<td>Testar fluxo completo de navegação</td>
+<td>2</td>
+
+<td>✅</td>
+<td>RF01, RF02</td>
+</tr>
+
+</table>
 
 <h4 id="burndownsprint1">📉 Burndown Sprint 1</h4>
 
-<p><em>A definir</em></p>
+<img src="./docs/sprint1/burndown.png">
 
 <hr>
 
-<h3 id="sprint2">⏱️ Sprint 2</h3>
+<h3 id="sprint2">⏱️ Sprint 2 — Dúvidas, Logs e Gestão das Perguntas 🥈</h3>
 
 <h4 id="backlogsprint2">📋 Backlog Sprint 2</h4>
 
-<p><em>A definir</em></p>
+<table>
+<tr>
+<th>ID</th>
+<th>Nome</th>
+<th>Pontos</th>
+<th>Responsáveis</th>
+<th>Status</th>
+<th>Requisitos Atendidos</th>
+</tr>
+
+<!-- Levantamento e Modelagem -->
+<tr>
+<td colspan="6"><strong>📖 Levantamento e Modelagem</strong></td>
+</tr>
+
+<tr>
+<td>32</td>
+<td>Criação do Diagrama de Classes</td>
+<td>5</td>
+
+<td>❌</td>
+<td>RNF04</td>
+</tr>
+
+<!-- Sistema de Perguntas -->
+<tr>
+<td colspan="6"><strong>📨 Sistema de Perguntas</strong></td>
+</tr>
+
+<tr>
+<td>33</td>
+<td>Criar input de dúvidas no frontend</td>
+<td>2</td>
+
+<td>❌</td>
+<td>RF05</td>
+</tr>
+
+<tr>
+<td>34</td>
+<td>Criar validação básica do formulário</td>
+<td>2</td>
+
+<td>❌</td>
+<td>RF05</td>
+</tr>
+
+<tr>
+<td>35</td>
+<td>Enviar dúvida para o backend</td>
+<td>2</td>
+
+<td>❌</td>
+<td>RF05</td>
+</tr>
+
+<tr>
+<td>36</td>
+<td>Criar rota POST /inquiries</td>
+<td>2</td>
+
+<td>❌</td>
+<td>RF05</td>
+</tr>
+
+<tr>
+<td>37</td>
+<td>Validar dados da pergunta no backend</td>
+<td>2</td>
+
+<td>❌</td>
+<td>RF05</td>
+</tr>
+
+<tr>
+<td>38</td>
+<td>Salvar pergunta no banco de dados</td>
+<td>2</td>
+
+<td>❌</td>
+<td>RF05, RF02</td>
+</tr>
+
+<!-- Área Administrativa / Secretaria -->
+<tr>
+<td colspan="6"><strong>🏛️ Área Administrativa / Secretaria</strong></td>
+</tr>
+
+<tr>
+<td>39</td>
+<td>Listar perguntas enviadas pelos alunos</td>
+<td>3</td>
+
+<td>❌</td>
+<td>RF06</td>
+</tr>
+
+<tr>
+<td>40</td>
+<td>Atualizar status das perguntas</td>
+<td>3</td>
+
+<td>❌</td>
+<td>RF06</td>
+</tr>
+
+<tr>
+<td>41</td>
+<td>Mostrar status da dúvida ao usuário</td>
+<td>2</td>
+
+<td>❌</td>
+<td>RF06</td>
+</tr>
+
+<tr>
+<td>42</td>
+<td>Enviar resposta da dúvida pela secretaria</td>
+<td>3</td>
+
+<td>❌</td>
+<td>RF06</td>
+</tr>
+
+<tr>
+<td>43</td>
+<td>Listar perguntas no painel da secretaria</td>
+<td>2</td>
+
+<td>❌</td>
+<td>RF06</td>
+</tr>
+
+<!-- Logs e Feedback -->
+<tr>
+<td colspan="6"><strong>📊 Logs e Feedback</strong></td>
+</tr>
+
+<tr>
+<td>44</td>
+<td>Salvar logs de navegação do usuário</td>
+<td>3</td>
+
+<td>❌</td>
+<td>RF08</td>
+</tr>
+
+<tr>
+<td>45</td>
+<td>Salvar feedback (Gostei / Não gostei) do usuário</td>
+<td>2</td>
+
+<td>❌</td>
+<td>RF07, RF08</td>
+</tr>
+
+<tr>
+<td>46</td>
+<td>Monitorar fluxo de utilização via logs</td>
+<td>2</td>
+
+<td>❌</td>
+<td>RF08</td>
+</tr>
+
+<tr>
+<td>47</td>
+<td>Testar persistência dos dados de log e feedback</td>
+<td>2</td>
+
+<td>❌</td>
+<td>RF07, RF08</td>
+</tr>
+
+</table>
 
 <h4 id="burndownsprint2">📉 Burndown Sprint 2</h4>
 
@@ -404,11 +880,135 @@ PostgreSQL
 
 <hr>
 
-<h3 id="sprint3">⏱️ Sprint 3</h3>
+<h3 id="sprint3">⏱️ Sprint 3 — Segurança e Autenticação 🥉</h3>
 
 <h4 id="backlogsprint3">📋 Backlog Sprint 3</h4>
 
-<p><em>A definir</em></p>
+<table>
+<tr>
+<th>ID</th>
+<th>Nome</th>
+<th>Pontos</th>
+<th>Responsáveis</th>
+<th>Status</th>
+<th>Requisitos Atendidos</th>
+</tr>
+
+<!-- Levantamento e Modelagem -->
+<tr>
+<td colspan="6"><strong>📖 Levantamento e Modelagem</strong></td>
+</tr>
+
+<tr>
+<td>48</td>
+<td>Criação do Diagrama de Sequência</td>
+<td>5</td>
+
+<td>❌</td>
+<td>RNF04</td>
+</tr>
+
+<!-- Autenticação -->
+<tr>
+<td colspan="6"><strong>🔐 Autenticação</strong></td>
+</tr>
+
+<tr>
+<td>49</td>
+<td>Criar página de Login</td>
+<td>3</td>
+
+<td>❌</td>
+<td>RF09, RNF01</td>
+</tr>
+
+<tr>
+<td>50</td>
+<td>Implementar JWT no backend</td>
+<td>5</td>
+
+<td>❌</td>
+<td>RF09, RNF08, RP06</td>
+</tr>
+
+<tr>
+<td>51</td>
+<td>Criar autenticação de usuários</td>
+<td>5</td>
+
+<td>❌</td>
+<td>RF09, RF03</td>
+</tr>
+
+<tr>
+<td>52</td>
+<td>Gerar token de acesso após login</td>
+<td>3</td>
+
+<td>❌</td>
+<td>RF09, RNF08</td>
+</tr>
+
+<tr>
+<td>53</td>
+<td>Validar autenticação no backend</td>
+<td>3</td>
+
+<td>❌</td>
+<td>RF09, RF11</td>
+</tr>
+
+<!-- Segurança -->
+<tr>
+<td colspan="6"><strong>🛡️ Segurança</strong></td>
+</tr>
+
+<tr>
+<td>54</td>
+<td>Proteger rotas privadas no frontend</td>
+<td>3</td>
+
+<td>❌</td>
+<td>RF11, RF10</td>
+</tr>
+
+<tr>
+<td>55</td>
+<td>Criar middleware de autenticação</td>
+<td>3</td>
+
+<td>❌</td>
+<td>RF11, RF10, RNF09</td>
+</tr>
+
+<tr>
+<td>56</td>
+<td>Validar permissões de acesso por papel (RBAC)</td>
+<td>5</td>
+
+<td>❌</td>
+<td>RF10, RF03</td>
+</tr>
+
+<tr>
+<td>57</td>
+<td>Implementar logout de usuário</td>
+<td>2</td>
+
+<td>❌</td>
+<td>RF09</td>
+</tr>
+
+<tr>
+<td>58</td>
+<td>Melhorar tratamento de erros de autenticação</td>
+<td>2</td>
+
+<td>❌</td>
+<td>RF09, RF11</td>
+</tr>
+
+</table>
 
 <h4 id="burndownsprint3">📉 Burndown Sprint 3</h4>
 
