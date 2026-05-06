@@ -21,7 +21,7 @@ def gerar_burndown(csv_path: Path):
             labels.append(row['Data'])
             day, mon = row['Data'].split('-')
             mon_num = month_map[mon.lower()]
-            datas.append(datetime(2025, mon_num, int(day)))
+            datas.append(datetime(datetime.now().year, mon_num, int(day)))
             real.append(float(row['Real']))
 
     if not real:
@@ -45,12 +45,12 @@ def gerar_burndown(csv_path: Path):
     plt.legend()
     plt.tight_layout()
 
-    output_path = base_path / f'/{sprint_name}/burndown.png'
+    output_path = base_path / sprint_name / 'burndown.png'
     output_path.parent.mkdir(parents=True, exist_ok=True)
     plt.savefig(output_path)
     plt.close()
 
-csv_files = sorted(base_path.glob('backlog_sprint*.csv'))
+csv_files = sorted((base_path / 'backlog').glob('backlog_sprint*.csv'))
 
 if csv_files:
     for csv_file in csv_files:
