@@ -1,5 +1,7 @@
 import * as jwt from "jsonwebtoken";
-import type { JwtPayload } from "jsonwebtoken";
+import type { JwtPayload, Secret, SignOptions } from "jsonwebtoken";
+
+
 
 type TokenPayload = {
   id: string;
@@ -7,10 +9,18 @@ type TokenPayload = {
   role: string;
 };
 
+type JwtExpiresIn = NonNullable<SignOptions["expiresIn"]>;
+
+
 function createToken(payload: TokenPayload): string {
-  const secret = process.env.JWT_SECRET ?? "jwt-dev-secret";
-  return jwt.sign(payload, secret, { expiresIn: "8h" });
+  const secret: Secret = process.env.JWT_SECRET ?? "jwt-dev-secret";
+  const expiresIn = (process.env.JWT_EXPIRES_IN ?? "8h") as JwtExpiresIn;
+
+  return jwt.sign(payload, secret, { expiresIn });
 }
+
+
+
 
 function verifyToken(token: string): TokenPayload | null {
   const decoded = jwt.verify(
