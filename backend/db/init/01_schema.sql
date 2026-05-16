@@ -16,6 +16,20 @@ BEGIN
 END;
 $$;
 
+CREATE TABLE IF NOT EXISTS satisfaction_feedback (
+  id BIGSERIAL PRIMARY KEY,
+  interaction_log_id BIGINT REFERENCES interaction_logs(id) ON DELETE CASCADE,
+  flag satisfaction_flag NOT NULL,
+  comment TEXT,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+CREATE INDEX IF NOT EXISTS idx_satisfaction_feedback_interaction_log_id
+  ON satisfaction_feedback(interaction_log_id);
+
+CREATE INDEX IF NOT EXISTS idx_satisfaction_feedback_flag
+  ON satisfaction_feedback(flag);
+
 CREATE TABLE IF NOT EXISTS users (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   name VARCHAR(120) NOT NULL,
