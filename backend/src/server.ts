@@ -6,7 +6,7 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
-app.use("/navigation", navigationRoutes);
+app.use("/", navigationRoutes);
 
 
 app.get("/", (req, res) => {

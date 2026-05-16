@@ -1,5 +1,20 @@
 import { pool } from "../database";
 
+export type CreateInquiryData = {
+  requesterName: string;
+  requesterEmail: string;
+  question: string;
+};
+
+export type SatisfactionFlag = "ATENDEU" | "NAO_ATENDEU";
+
+export type CreateFeedbackData = {
+  sessionId?: string;
+  navigationFlow?: unknown[];
+  inquiryIds?: number[];
+  flag: SatisfactionFlag;
+};
+
 export const navigationRepository = {
   async findRoot() {
     const result = await pool.query(`
@@ -41,6 +56,41 @@ export const navigationRepository = {
       parent,
       children: childrenResult.rows
     }
+  },
+
+  async createInquiry(data: CreateInquiryData) {
+    const result = await pool.query(
+      `
+      INSERT INTO inquiries (requester_name, requester_email, question)
+      VALUES ($1, $2, $3)
+      RETURNING id, requester_name, requester_email, question, status, created_at
+      `,
+      [data.requesterName, data.requesterEmail, data.question]
+    );
+
+    return result.rows[0];
+  },
+
+  async createFeedback(data: CreateFeedbackData) {
+    const result = await pool.query(
+      `
+      INSERT INTO interaction_logs (session_id, navigation_flow, inquiry_ids, flag)
+      VALUES (
+        COALESCE($1::uuid, gen_random_uuid()),
+        $2::jsonb,
+        $3::jsonb,
+        $4::satisfaction_flag
+      )
+      RETURNING id, session_id, navigation_flow, inquiry_ids, flag, created_at
+      `,
+      [
+        data.sessionId ?? null,
+        JSON.stringify(data.navigationFlow ?? []),
+        JSON.stringify(data.inquiryIds ?? []),
+        data.flag,
+      ]
+    );
+
+    return result.rows[0];
   }
 };
-

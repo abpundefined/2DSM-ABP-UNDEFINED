@@ -1,10 +1,19 @@
 import { Router } from "express";
-import {getRootNavigation, getChildren} from "../controllers/navigation.controller";
+import {
+  createFeedback,
+  createInquiry,
+  getChildren,
+  getRootNavigation,
+} from "../controllers/navigation.controller";
 
 const router = Router();
 
-router.get("/root", getRootNavigation);
+router.get("/navigation/root", getRootNavigation);
 
-router.get ("/:slug/children", getChildren);
+router.get ("/navigation/:slug/children", getChildren);
+
+router.post("/inquiries", createInquiry);
+
+router.post("/feedback", createFeedback);
 
 export default router;

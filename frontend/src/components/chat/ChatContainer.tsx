@@ -27,7 +27,7 @@ type NavigationLevel = {
   options: DisplayOption[];
 };
 
-const API_PREFIX = import.meta.env.VITE_API_URL ?? '';
+const API_PREFIX = import.meta.env.VITE_API_URL ?? 'http://localhost:3000';
 const BACK_OPTION: DisplayOption = { title: 'Voltar', slug: '__back' };
 
 function getApiUrl(path: string) {
