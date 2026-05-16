@@ -1097,7 +1097,7 @@ PostgreSQL
 
 <hr>
 
-<h2 id="documentacao">🖺 Diagramas</h2>
+<h2 id="documentacao">🖺 Documentação</h2>
 
 <h3 id="bancodedados">Banco de dados</h3>
 
