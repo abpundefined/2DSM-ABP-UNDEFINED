@@ -23,6 +23,15 @@ Este repositório contém o desenvolvimento do projeto interdisciplinar da disci
 <h2>🚀 Planejamento de Sprints</h2>
 
 <ul>
+
+<li>
+<a href="#documentacao">🗎 Documentação</a>
+<ul>
+<li><a href="#bancodedados">🗃️ Banco de dados</a></li>
+<li><a href="#casosdeuso">📊 Diagrama de casos de uso</a></li>
+</ul>
+</li>
+
 <li>
 <a href="#sprint1">⏱️ Sprint 1</a>
 <ul>
@@ -1084,3 +1093,37 @@ PostgreSQL
 </tr>
 
 </table>
+
+
+<hr>
+
+<h2 id="documentacao">🖺 Documentação</h2>
+
+<h3 id="bancodedados">Banco de dados</h3>
+
+<table>
+  <tr>
+    <th>Objeto</th>
+    <th>Tipo</th>
+    <th>Responsabilidade</th>
+    <th>Conceito de BD Relacionado</th>
+  </tr>
+
+  <tr>
+    <td><code>backend/src/repositories/</code></td>
+    <td>Repositório</td>
+    <td>Responsável pelas operações de acesso aos dados de navegação</td>
+    <td>CRUD, consultas SQL, persistência</td>
+  </tr>
+<tr>
+  <td><code>backend/db/init/01_schema.sql</code></td>
+  <td>Script SQL</td>
+  <td>Responsável pela criação da estrutura inicial do banco de dados</td>
+  <td>DDL, criação de tabelas, constraints, modelagem relacional</td>
+</tr>
+
+</table>
+
+<h3 id="casosdeuso">Casos de uso</h3>
+<td><img src="./docs/sprint1/CasosDeUso.png"></td>
+
