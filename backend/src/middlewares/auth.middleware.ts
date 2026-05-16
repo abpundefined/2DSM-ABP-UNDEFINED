@@ -10,13 +10,22 @@ function authMiddleware(
   response: Response,
   next: NextFunction,
 ): void {
-  const authorization = request.headers.authorization;
-  const [, token] = authorization?.split(" ") || [];
+    
+const authorization = request.headers.authorization;
 
-  if (!token) {
-    response.status(401).json({ message: "Token não informado." });
-    return;
-  }
+if (!authorization) {
+  response.status(401).json({ message: "Token não informado." });
+  return;
+}
+
+const parts = authorization.split(" ");
+const [scheme, token] = parts;
+
+if (scheme !== "Bearer" || !token || parts.length !== 2) {
+  response.status(401).json({ message: "Formato do token inválido. Use Bearer <token>." });
+  return;
+}
+
 
   try {
     const user = verifyToken(token);
