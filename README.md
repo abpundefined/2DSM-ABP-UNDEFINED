@@ -703,7 +703,7 @@ PostgreSQL
 
 <hr>
 
-<h3 id="sprint2">⏱️ Sprint 2 — Dúvidas, Logs e Gestão das Perguntas 🥈</h3>
+<h3 id="sprint2">⏱️ Sprint 2 — Funcionalidades Administrativas, Segurança e Monitoramento 🥈</h3>
 
 <h4 id="backlogsprint2">📋 Backlog Sprint 2</h4>
 
@@ -712,6 +712,7 @@ PostgreSQL
 <th>ID</th>
 <th>Nome</th>
 <th>Pontos</th>
+<th>Prioridade</th>
 <th>Responsáveis</th>
 <th>Status</th>
 <th>Requisitos Atendidos</th>
@@ -719,29 +720,31 @@ PostgreSQL
 
 <!-- Levantamento e Modelagem -->
 <tr>
-<td colspan="6"><strong>📖 Levantamento e Modelagem</strong></td>
+<td colspan="7"><strong>📖 Levantamento e Modelagem</strong></td>
 </tr>
 
 <tr>
 <td>32</td>
 <td>Criação do Diagrama de Classes</td>
 <td>5</td>
-
+<td>🟢 Baixa</td>
 <td>❌</td>
+<td>✅ Concluído</td>
 <td>RNF04</td>
 </tr>
 
 <!-- Sistema de Perguntas -->
 <tr>
-<td colspan="6"><strong>📨 Sistema de Perguntas</strong></td>
+<td colspan="7"><strong>📨 Sistema de Perguntas</strong></td>
 </tr>
 
 <tr>
 <td>33</td>
 <td>Criar input de dúvidas no frontend</td>
 <td>2</td>
-
-<td>❌</td>
+<td>🔴 Alta</td>
+<td>M</td>
+<td>✅ Concluído</td>
 <td>RF05</td>
 </tr>
 
@@ -749,8 +752,9 @@ PostgreSQL
 <td>34</td>
 <td>Criar validação básica do formulário</td>
 <td>2</td>
-
+<td>🔴 Alta</td>
 <td>❌</td>
+<td>✅ Concluído</td>
 <td>RF05</td>
 </tr>
 
@@ -758,8 +762,9 @@ PostgreSQL
 <td>35</td>
 <td>Enviar dúvida para o backend</td>
 <td>2</td>
-
-<td>❌</td>
+<td>🔴 Alta</td>
+<td>PA</td>
+<td>✅ Concluído</td>
 <td>RF05</td>
 </tr>
 
@@ -767,8 +772,9 @@ PostgreSQL
 <td>36</td>
 <td>Criar rota POST /inquiries</td>
 <td>2</td>
-
-<td>❌</td>
+<td>🔴 Alta</td>
+<td>NF</td>
+<td>✅ Concluído</td>
 <td>RF05</td>
 </tr>
 
@@ -776,8 +782,9 @@ PostgreSQL
 <td>37</td>
 <td>Validar dados da pergunta no backend</td>
 <td>2</td>
-
-<td>❌</td>
+<td>🔴 Alta</td>
+<td>NF</td>
+<td>✅ Concluído</td>
 <td>RF05</td>
 </tr>
 
@@ -785,22 +792,24 @@ PostgreSQL
 <td>38</td>
 <td>Salvar pergunta no banco de dados</td>
 <td>2</td>
-
-<td>❌</td>
+<td>🔴 Alta</td>
+<td>NF</td>
+<td>✅ Concluído</td>
 <td>RF05, RF02</td>
 </tr>
 
-<!-- Área Administrativa / Secretaria -->
+<!-- Área Administrativa -->
 <tr>
-<td colspan="6"><strong>🏛️ Área Administrativa / Secretaria</strong></td>
+<td colspan="7"><strong>🏛️ Área Administrativa / Secretaria</strong></td>
 </tr>
 
 <tr>
 <td>39</td>
 <td>Listar perguntas enviadas pelos alunos</td>
 <td>3</td>
-
-<td>❌</td>
+<td>🔴 Alta</td>
+<td>PA</td>
+<td>✅ Concluído</td>
 <td>RF06</td>
 </tr>
 
@@ -808,8 +817,9 @@ PostgreSQL
 <td>40</td>
 <td>Atualizar status das perguntas</td>
 <td>3</td>
-
-<td>❌</td>
+<td>🔴 Alta</td>
+<td>PA</td>
+<td>✅ Concluído</td>
 <td>RF06</td>
 </tr>
 
@@ -817,8 +827,9 @@ PostgreSQL
 <td>41</td>
 <td>Mostrar status da dúvida ao usuário</td>
 <td>2</td>
-
-<td>❌</td>
+<td>🔴 Alta</td>
+<td>PA</td>
+<td>✅ Concluído</td>
 <td>RF06</td>
 </tr>
 
@@ -826,8 +837,9 @@ PostgreSQL
 <td>42</td>
 <td>Enviar resposta da dúvida pela secretaria</td>
 <td>3</td>
-
+<td>🟡 Média</td>
 <td>❌</td>
+<td>✅ Concluído</td>
 <td>RF06</td>
 </tr>
 
@@ -835,50 +847,150 @@ PostgreSQL
 <td>43</td>
 <td>Listar perguntas no painel da secretaria</td>
 <td>2</td>
-
+<td>🟡 Média</td>
 <td>❌</td>
+<td>✅ Concluído</td>
+<td>RF06</td>
+</tr>
+
+<tr>
+<td>44</td>
+<td>Criar página de Administração</td>
+<td>3</td>
+<td>🟡 Média</td>
+<td>JL</td>
+<td>✅ Concluído</td>
 <td>RF06</td>
 </tr>
 
 <!-- Logs e Feedback -->
 <tr>
-<td colspan="6"><strong>📊 Logs e Feedback</strong></td>
-</tr>
-
-<tr>
-<td>44</td>
-<td>Salvar logs de navegação do usuário</td>
-<td>3</td>
-
-<td>❌</td>
-<td>RF08</td>
+<td colspan="7"><strong>📊 Logs e Feedback</strong></td>
 </tr>
 
 <tr>
 <td>45</td>
-<td>Salvar feedback (Gostei / Não gostei) do usuário</td>
-<td>2</td>
-
-<td>❌</td>
-<td>RF07, RF08</td>
-</tr>
-
-<tr>
-<td>46</td>
-<td>Monitorar fluxo de utilização via logs</td>
-<td>2</td>
-
-<td>❌</td>
+<td>Salvar logs de navegação do usuário</td>
+<td>3</td>
+<td>🟡 Média</td>
+<td>M</td>
+<td>✅ Concluído</td>
 <td>RF08</td>
 </tr>
 
 <tr>
+<td>46</td>
+<td>Salvar feedback (Gostei / Não gostei) do usuário</td>
+<td>2</td>
+<td>🟡 Média</td>
+<td>M</td>
+<td>✅ Concluído</td>
+<td>RF07, RF08</td>
+</tr>
+
+<tr>
 <td>47</td>
+<td>Monitorar fluxo de utilização via logs</td>
+<td>2</td>
+<td>🟡 Média</td>
+<td>❌</td>
+<td>✅ Concluído</td>
+<td>RF08</td>
+</tr>
+
+<tr>
+<td>48</td>
 <td>Testar persistência dos dados de log e feedback</td>
 <td>2</td>
-
+<td>🟢 Baixa</td>
 <td>❌</td>
+<td>✅ Concluído</td>
 <td>RF07, RF08</td>
+</tr>
+
+<!-- Segurança e Autenticação -->
+<tr>
+<td colspan="7"><strong>🔐 Segurança e Autenticação</strong></td>
+</tr>
+
+<tr>
+<td>49</td>
+<td>Criar página de Login</td>
+<td>3</td>
+<td>🟡 Média</td>
+<td>❌</td>
+<td>✅ Concluído</td>
+<td>RF09, RNF01</td>
+</tr>
+
+<tr>
+<td>50</td>
+<td>Implementar JWT no backend</td>
+<td>5</td>
+<td>🔴 Alta</td>
+<td>❌</td>
+<td>✅ Concluído</td>
+<td>RF09, RNF08</td>
+</tr>
+
+<tr>
+<td>51</td>
+<td>Criar autenticação de usuários</td>
+<td>5</td>
+<td>🔴 Alta</td>
+<td>❌</td>
+<td>✅ Concluído</td>
+<td>RF09, RF03</td>
+</tr>
+
+<tr>
+<td>52</td>
+<td>Gerar token de acesso após login</td>
+<td>3</td>
+<td>🔴 Alta</td>
+<td>❌</td>
+<td>✅ Concluído</td>
+<td>RF09, RNF08</td>
+</tr>
+
+<tr>
+<td>53</td>
+<td>Validar autenticação no backend</td>
+<td>3</td>
+<td>🔴 Alta</td>
+<td>❌</td>
+<td>✅ Concluído</td>
+<td>RF09, RF11</td>
+</tr>
+
+<tr>
+<td>54</td>
+<td>Proteger rotas privadas no frontend</td>
+<td>3</td>
+<td>🔴 Alta</td>
+<td>❌</td>
+<td>✅ Concluído</td>
+<td>RF11, RF10</td>
+</tr>
+
+<tr>
+<td>55</td>
+<td>Criar middleware de autenticação</td>
+<td>3</td>
+<td>🔴 Alta</td>
+<td>❌</td>
+<td>✅ Concluído</td>
+<td>RF11, RF10, RNF09</td>
+</tr>
+
+<tr>
+<td>56</td>
+<td>Validar permissões de acesso por papel (RBAC)</td>
+<td>5</td>
+<td>🟡 Média</td>
+<td>❌</td>
+<td>✅ Concluído</td>
+<td>RF10, RF03</td>
 </tr>
 
 </table>
