@@ -616,7 +616,7 @@ docker-compose up --build
     <td>5</td>
     <td>🟡 Média</td>
     <td>Pedro</td>
-    <td>⏳</td>
+    <td>✅</td>
     <td>RNF04</td>
 </tr>
 <tr>
@@ -691,7 +691,7 @@ docker-compose up --build
     <td>3</td>
     <td>🟡 Média</td>
     <td>Marcus</td>
-    <td>⏳</td>
+    <td>✅</td>
     <td>RF09, RF11</td>
 </tr>
 <tr>
@@ -712,7 +712,7 @@ docker-compose up --build
     <td>5</td>
     <td>🔴 Alta</td>
     <td>João</td>
-    <td>⏳</td>
+    <td>✅</td>
     <td>RF04, RF06</td>
 </tr>
 <tr>
