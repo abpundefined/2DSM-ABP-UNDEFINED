@@ -62,3 +62,70 @@ export async function register(req: Request, res: Response) {
 export async function getMe(req: AuthenticatedRequest, res: Response) {
   res.json({ user: req.user });
 }
+
+export async function forgotPassword(req: Request, res: Response) {
+  const { email } = req.body;
+
+  if (typeof email !== "string" || !email) {
+    res.status(400).json({ message: "O e-mail é obrigatório." });
+    return;
+  }
+
+  const { authRepository } = await import("../repositories/auth.repository");
+  const { emailService } = await import("../services/email.service");
+
+  const user = await authRepository.findUserByEmail(email);
+
+  if (!user) {
+    // Por segurança, não confirmamos se o e-mail existe ou não
+    res.json({ message: "Se o e-mail existir em nossa base, você receberá as instruções." });
+    return;
+  }
+
+  // Gera código de 6 dígitos
+  const code = Math.floor(100000 + Math.random() * 900000).toString();
+  
+  // Imprime no console local para debug/testes
+  console.log(`[DEV ONLY] Código de recuperação gerado para ${email}: ${code}`);
+
+  // Expira em 15 minutos
+  const expiresAt = new Date(Date.now() + 15 * 60 * 1000);
+
+  await authRepository.saveResetToken(email, code, expiresAt);
+
+  try {
+    await emailService.sendResetPasswordEmail(email, code);
+  } catch (error) {
+    console.error("Erro ao enviar e-mail:", error);
+    // Mesmo que o e-mail falhe, para evitar enumeração de usuários, enviamos sucesso.
+  }
+
+  res.json({ message: "Se o e-mail existir em nossa base, você receberá as instruções." });
+}
+
+export async function resetPassword(req: Request, res: Response) {
+  const { email, code, newPassword } = req.body;
+
+  if (!email || !code || !newPassword) {
+    res.status(400).json({ message: "E-mail, código e nova senha são obrigatórios." });
+    return;
+  }
+
+  const { authRepository } = await import("../repositories/auth.repository");
+
+  const user = await authRepository.findUserByResetToken(email, code);
+
+  if (!user) {
+    res.status(400).json({ message: "Código inválido ou expirado." });
+    return;
+  }
+
+  if (new Date(user.reset_token_expires) < new Date()) {
+    res.status(400).json({ message: "O código expirou. Solicite um novo." });
+    return;
+  }
+
+  await authRepository.updateUserPasswordAndClearToken(email, newPassword);
+
+  res.json({ message: "Senha redefinida com sucesso." });
+}

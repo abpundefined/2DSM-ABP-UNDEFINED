@@ -48,11 +48,17 @@ export const authService = {
     localStorage.removeItem(USER_STORAGE_KEY);
   },
 
-  recoverPassword(email: string): Promise<void> {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve();
-      }, 1000);
+  recoverPassword(email: string) {
+    return apiRequest<{ message: string }>("/auth/forgot-password", {
+      method: "POST",
+      body: JSON.stringify({ email }),
+    });
+  },
+
+  resetPassword(email: string, code: string, newPassword: string) {
+    return apiRequest<{ message: string }>("/auth/reset-password", {
+      method: "POST",
+      body: JSON.stringify({ email, code, newPassword }),
     });
   },
 };

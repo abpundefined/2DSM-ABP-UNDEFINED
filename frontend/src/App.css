@@ -854,6 +854,14 @@ select:-webkit-autofill {
   font-weight: 700;
 }
 
+.sd-auth-success {
+  padding: 12px 14px;
+  border-radius: 6px;
+  background: #d1fae5;
+  color: #065f46;
+  font-weight: 700;
+}
+
 .sd-btn-primary,
 .sd-secondary-button,
 .sd-danger-button {
