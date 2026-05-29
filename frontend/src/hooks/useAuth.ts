@@ -32,5 +32,19 @@ export function useAuth() {
     setUser(null);
   };
 
-  return { token, user, error, loading, login, logout, isAuthenticated: !!token };
+  const recoverPassword = async (email: string) => {
+    setLoading(true);
+    setError(null);
+    try {
+      await authService.recoverPassword(email);
+    } catch (err) {
+      const errorInstance = err as Error;
+      setError(errorInstance.message || "Erro ao solicitar recuperação de senha.");
+      throw err;
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return { token, user, error, loading, login, logout, recoverPassword, isAuthenticated: !!token };
 }

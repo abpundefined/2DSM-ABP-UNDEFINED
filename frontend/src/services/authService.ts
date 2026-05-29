@@ -47,4 +47,12 @@ export const authService = {
     localStorage.removeItem("token");
     localStorage.removeItem(USER_STORAGE_KEY);
   },
+
+  recoverPassword(email: string): Promise<void> {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve();
+      }, 1000);
+    });
+  },
 };
