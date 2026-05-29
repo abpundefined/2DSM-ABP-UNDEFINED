@@ -31,6 +31,14 @@ services:
       CORS_ORIGIN: http://localhost:5173
       JWT_SECRET: fatec_jacarei_super_secreta_2026_abp_oficial
       JWT_EXPIRES_IN: 8h
+      SMTP_HOST: sandbox.smtp.mailtrap.io
+      SMTP_PORT: 2525
+      SMTP_USER: 3ccc4c194854f6
+      SMTP_PASS: 7c84499603809a
+      # SMTP_HOST: smtp.gmail.com
+      # SMTP_PORT: 587
+      # SMTP_USER: o_email_do_projeto@gmail.com
+      # SMTP_PASS: aquela_senha_de_16_letras_gerada_pelo_google
     depends_on:
       postgres:
         condition: service_healthy
@@ -88,3 +96,4 @@ volumes:
 networks:
   internal_net:
     driver: bridge
+

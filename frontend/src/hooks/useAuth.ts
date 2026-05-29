@@ -46,5 +46,19 @@ export function useAuth() {
     }
   };
 
-  return { token, user, error, loading, login, logout, recoverPassword, isAuthenticated: !!token };
+  const resetPassword = async (email: string, code: string, newPassword: string) => {
+    setLoading(true);
+    setError(null);
+    try {
+      await authService.resetPassword(email, code, newPassword);
+    } catch (err) {
+      const errorInstance = err as Error;
+      setError(errorInstance.message || "Erro ao redefinir a senha.");
+      throw err;
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return { token, user, error, loading, login, logout, recoverPassword, resetPassword, isAuthenticated: !!token };
 }

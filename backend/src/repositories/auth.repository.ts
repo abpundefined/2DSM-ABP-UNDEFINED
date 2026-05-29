@@ -25,4 +25,33 @@ export const authRepository = {
     );
     return result.rows[0] || null;
   },
+
+  async saveResetToken(email: string, token: string, expiresAt: Date) {
+    await pool.query(
+      `UPDATE users
+       SET reset_token = $1, reset_token_expires = $2
+       WHERE email = $3`,
+      [token, expiresAt, email]
+    );
+  },
+
+  async findUserByResetToken(email: string, token: string) {
+    const result = await pool.query(
+      `SELECT id, reset_token_expires
+       FROM users
+       WHERE email = $1 AND reset_token = $2`,
+      [email, token]
+    );
+    return result.rows[0] || null;
+  },
+
+  async updateUserPasswordAndClearToken(email: string, newPasswordPlain: string) {
+    const passwordEncoded = await hashPassword(newPasswordPlain);
+    await pool.query(
+      `UPDATE users
+       SET password_hash = $1, reset_token = NULL, reset_token_expires = NULL
+       WHERE email = $2`,
+      [passwordEncoded, email]
+    );
+  },
 };

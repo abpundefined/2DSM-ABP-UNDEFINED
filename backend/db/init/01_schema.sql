@@ -273,6 +273,17 @@ BEGIN
     ALTER TABLE interaction_logs
     DROP COLUMN inquiry_id;
   END IF;
+
+  IF NOT EXISTS (
+    SELECT 1
+    FROM information_schema.columns
+    WHERE table_schema = 'public'
+      AND table_name = 'users'
+      AND column_name = 'reset_token'
+  ) THEN
+    ALTER TABLE users ADD COLUMN reset_token VARCHAR(6);
+    ALTER TABLE users ADD COLUMN reset_token_expires TIMESTAMPTZ;
+  END IF;
 END;
 $$;
 
