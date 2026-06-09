@@ -1,37 +1,15 @@
-import { useEffect, useState } from "react";
-import {
-  BarChart,
-  Bar,
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  ResponsiveContainer,
-  PieChart,
-  Pie,
-  Cell,
-  Legend,
-} from "recharts";
+import { useEffect, useState, type ReactNode } from "react";
 import type { AuthUser } from "../../services/authService";
 import {
   dashboardService,
   type DashboardStats,
   type Period,
+  type PieDataPoint,
+  type TopQuestionPoint,
 } from "../../services/dashboardService";
 import "./Dashboard.css";
 
-// ── Paleta Fatec ──────────────────────────────────────────────────────────────
-const PIE_COLORS  = ["#bf0000", "#4a4a4a"];
-const BAR_COLOR   = "#bf0000";
-const LINE_COLOR  = "#bf0000";
-const EMAIL_COLOR = "#4a4a4a";
-const TOP_COLOR   = "#bf0000";
-
-// ── Tipos internos ────────────────────────────────────────────────────────────
 type AdminTab = "dashboard" | "perguntas" | "duvidas" | "logs";
-type ChartType = "bar" | "line";
 
 type DashboardProps = {
   user: AuthUser | null;
@@ -39,51 +17,66 @@ type DashboardProps = {
   onNavigateToChat: () => void;
 };
 
-// ── Tooltip compartilhado ─────────────────────────────────────────────────────
-const TT = {
-  contentStyle: {
-    background: "#fff",
-    border: "1px solid #e8e8e8",
-    borderRadius: "8px",
-    boxShadow: "0 4px 16px rgba(0,0,0,0.10)",
-    fontSize: "0.85rem",
-    padding: "10px 14px",
-  },
-  labelStyle: { fontWeight: 700, color: "#121212", marginBottom: 4 },
-  cursor:     { fill: "rgba(191,0,0,0.04)" },
+const PERIOD_LABELS: Record<Period, string> = {
+  all: "Todo o período",
+  "30d": "Últimos 30 dias",
+  "7d": "Últimos 7 dias",
 };
 
-// ── StatCard ──────────────────────────────────────────────────────────────────
+const PERIOD_HINTS: Record<Period, string> = {
+  all: "visão geral desde o início do semestre",
+  "30d": "recorte das últimas quatro semanas",
+  "7d": "recorte operacional da semana",
+};
+
 type StatCardProps = {
   label: string;
   value: number;
   description: string;
+  suffix?: string;
   accent?: boolean;
   onClick?: () => void;
 };
 
-function StatCard({ label, value, description, accent = false, onClick }: StatCardProps) {
-  const clickable = Boolean(onClick);
-  return (
-    <button
-      type="button"
-      className={[
-        "db-stat-card",
-        accent   ? "db-stat-card--accent"    : "",
-        clickable ? "db-stat-card--clickable" : "",
-      ].filter(Boolean).join(" ")}
-      onClick={onClick}
-      aria-label={`${label}: ${value}. ${description}`}
-    >
-      <span className="db-stat-value">{value.toLocaleString("pt-BR")}</span>
+function StatCard({ label, value, description, suffix = "", accent = false, onClick }: StatCardProps) {
+  const content = (
+    <>
+      <span className="db-stat-value">
+        {value.toLocaleString("pt-BR")}
+        {suffix && <span className="db-stat-suffix">{suffix}</span>}
+      </span>
       <span className="db-stat-label">{label}</span>
       <span className="db-stat-desc">{description}</span>
-      {clickable && <span className="db-stat-cta" aria-hidden="true">Ver detalhes →</span>}
-    </button>
+      {onClick && <span className="db-stat-cta" aria-hidden="true">Ver detalhes</span>}
+    </>
+  );
+
+  const className = [
+    "db-stat-card",
+    accent ? "db-stat-card--accent" : "",
+    onClick ? "db-stat-card--clickable" : "",
+  ].filter(Boolean).join(" ");
+
+  if (onClick) {
+    return (
+      <button
+        type="button"
+        className={className}
+        onClick={onClick}
+        aria-label={`${label}: ${value}${suffix}. ${description}`}
+      >
+        {content}
+      </button>
+    );
+  }
+
+  return (
+    <div className={className} aria-label={`${label}: ${value}${suffix}. ${description}`}>
+      {content}
+    </div>
   );
 }
 
-// ── EmptyState ────────────────────────────────────────────────────────────────
 function EmptyState({ message = "Nenhum dado para o período selecionado." }: { message?: string }) {
   return (
     <div className="db-empty" role="status" aria-label={message}>
@@ -97,18 +90,16 @@ function EmptyState({ message = "Nenhum dado para o período selecionado." }: { 
   );
 }
 
-// ── ChartCard ─────────────────────────────────────────────────────────────────
 type ChartCardProps = {
   title: string;
   subtitle: string;
   wide?: boolean;
   tall?: boolean;
-  headerRight?: React.ReactNode;
-  children: React.ReactNode;
+  headerRight?: ReactNode;
+  children: ReactNode;
 };
 
 function ChartCard({ title, subtitle, wide, tall, headerRight, children }: ChartCardProps) {
-  const areaHeight = tall ? 280 : 240;
   return (
     <div className={["db-chart-card", wide ? "db-chart-card--wide" : ""].filter(Boolean).join(" ")}>
       <div className="db-chart-head">
@@ -118,105 +109,324 @@ function ChartCard({ title, subtitle, wide, tall, headerRight, children }: Chart
         </div>
         {headerRight && <div className="db-chart-controls">{headerRight}</div>}
       </div>
-      <div style={{ width: "100%", height: areaHeight, position: "relative" }}>
+      <div className={["db-chart-area", tall ? "db-chart-area--tall" : ""].filter(Boolean).join(" ")}>
         {children}
       </div>
     </div>
   );
 }
 
-// ── Dashboard ─────────────────────────────────────────────────────────────────
+function normalizePie(data: PieDataPoint[] | undefined) {
+  return (data ?? [])
+    .filter(Boolean)
+    .map((item) => ({
+      ...item,
+      name: normalizeStatusName(item.name),
+      value: typeof item.value === "number" ? item.value : Number(item.value) || 0,
+    }))
+    .filter((item) => item.value > 0);
+}
+
+function normalizeTop(data: TopQuestionPoint[] | undefined) {
+  return (data ?? [])
+    .filter(Boolean)
+    .map((item) => ({
+      ...item,
+      count: typeof item.count === "number" ? item.count : Number(item.count) || 0,
+    }))
+    .filter((item) => item.count > 0);
+}
+
+function normalizeStatusName(name: string) {
+  const clean = name.toLowerCase();
+  if (clean === "open" || clean === "aberta" || clean === "abertas") return "Abertas";
+  if (clean === "resolved" || clean === "respondida" || clean === "respondidas") return "Respondidas";
+  return name;
+}
+
+function percent(value: number, total: number) {
+  if (total <= 0) return 0;
+  return Math.round((value / total) * 100);
+}
+
+type TrendBarPoint = {
+  day: string;
+  value: number;
+};
+
+function TrendBars({
+  data,
+  unit,
+  tone = "red",
+}: {
+  data: TrendBarPoint[];
+  unit: string;
+  tone?: "red" | "dark";
+}) {
+  const total = data.reduce((sum, item) => sum + item.value, 0);
+  const max = Math.max(...data.map((item) => item.value), 1);
+  const latest = data[data.length - 1]?.value ?? 0;
+  const previous = data[data.length - 2]?.value ?? latest;
+  const delta = latest - previous;
+  const deltaLabel = delta > 0 ? `+${delta}` : String(delta);
+
+  return (
+    <div className={`db-trend-panel db-trend-panel--${tone}`}>
+      <div className="db-trend-summary" aria-label={`Resumo de ${unit}`}>
+        <div>
+          <span>Total</span>
+          <strong>{total.toLocaleString("pt-BR")}</strong>
+        </div>
+        <div>
+          <span>Maior volume</span>
+          <strong>{max.toLocaleString("pt-BR")}</strong>
+        </div>
+        <div>
+          <span>Variação final</span>
+          <strong className={delta > 0 ? "db-trend-up" : delta < 0 ? "db-trend-down" : ""}>
+            {delta === 0 ? "0" : deltaLabel}
+          </strong>
+        </div>
+      </div>
+
+      <div className="db-trend-bars" role="list" aria-label={`${unit} por período`}>
+        {data.map((item) => {
+          const height = Math.max(8, Math.round((item.value / max) * 100));
+
+          return (
+            <div
+              key={item.day}
+              className="db-trend-item"
+              role="listitem"
+              aria-label={`${item.day}: ${item.value.toLocaleString("pt-BR")} ${unit}`}
+            >
+              <span className="db-trend-value">{item.value.toLocaleString("pt-BR")}</span>
+              <div className="db-trend-bar-zone" aria-hidden="true">
+                <span className="db-trend-fill" style={{ height: `${height}%` }} />
+              </div>
+              <span className="db-trend-label">{item.day}</span>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+function StatusSummary({ data }: { data: PieDataPoint[] }) {
+  const total = data.reduce((sum, item) => sum + item.value, 0);
+
+  return (
+    <div className="db-status-panel">
+      <div className="db-status-total">
+        <span>Total encaminhadas</span>
+        <strong>{total.toLocaleString("pt-BR")}</strong>
+      </div>
+
+      <div className="db-status-stack" aria-hidden="true">
+        {data.map((item) => (
+          <span
+            key={item.name}
+            className={item.name === "Abertas" ? "db-status-segment--open" : "db-status-segment--resolved"}
+            style={{ width: `${Math.max(3, percent(item.value, total))}%` }}
+          />
+        ))}
+      </div>
+
+      <div className="db-status-list" role="list" aria-label="Status da fila da secretaria">
+        {data.map((item) => {
+          const share = percent(item.value, total);
+
+          return (
+            <div
+              key={item.name}
+              className="db-status-row"
+              role="listitem"
+              aria-label={`${item.name}: ${item.value.toLocaleString("pt-BR")} dúvidas, ${share}%`}
+            >
+              <span className={item.name === "Abertas" ? "db-status-dot db-status-dot--open" : "db-status-dot db-status-dot--resolved"} />
+              <span className="db-status-name">{item.name}</span>
+              <strong>{item.value.toLocaleString("pt-BR")}</strong>
+              <span className="db-status-share">{share}%</span>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+function AudienceBars({ data }: { data: PieDataPoint[] }) {
+  const total = data.reduce((sum, item) => sum + item.value, 0);
+  const max = Math.max(...data.map((item) => item.value), 1);
+
+  return (
+    <div className="db-audience-list" role="list">
+      {data.map((item) => {
+        const share = percent(item.value, total);
+        const width = Math.max(6, Math.round((item.value / max) * 100));
+
+        return (
+          <div
+            key={item.name}
+            className="db-audience-row"
+            role="listitem"
+            aria-label={`${item.name}: ${item.value.toLocaleString("pt-BR")} atendimentos, ${share}%`}
+          >
+            <div className="db-audience-meta">
+              <span className="db-audience-name">{item.name}</span>
+              <strong className="db-audience-value">
+                {item.value.toLocaleString("pt-BR")}
+                <span>{share}%</span>
+              </strong>
+            </div>
+            <div className="db-audience-track" aria-hidden="true">
+              <span className="db-audience-fill" style={{ width: `${width}%` }} />
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+function TopicBars({
+  data,
+  unit,
+  tone,
+}: {
+  data: TopQuestionPoint[];
+  unit: string;
+  tone: "red" | "dark";
+}) {
+  const total = data.reduce((sum, item) => sum + item.count, 0);
+  const max = Math.max(...data.map((item) => item.count), 1);
+
+  return (
+    <div className={`db-audience-list db-audience-list--${tone}`} role="list">
+      {data.map((item) => {
+        const share = percent(item.count, total);
+        const width = Math.max(6, Math.round((item.count / max) * 100));
+
+        return (
+          <div
+            key={item.title}
+            className="db-audience-row"
+            role="listitem"
+            aria-label={`${item.title}: ${item.count.toLocaleString("pt-BR")} ${unit}, ${share}%`}
+          >
+            <div className="db-audience-meta">
+              <span className="db-audience-name">{item.title}</span>
+              <strong className="db-audience-value">
+                {item.count.toLocaleString("pt-BR")}
+                <span>{share}%</span>
+              </strong>
+            </div>
+            <div className="db-audience-track" aria-hidden="true">
+              <span className="db-audience-fill" style={{ width: `${width}%` }} />
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
 export function Dashboard({ user, onTabChange, onNavigateToChat }: DashboardProps) {
-  const [stats,     setStats]     = useState<DashboardStats | null>(null);
-  const [loading,   setLoading]   = useState<boolean>(true);
-  const [error,     setError]     = useState<string | null>(null);
-  const [period,    setPeriod]    = useState<Period>("all");
-  const [chartType, setChartType] = useState<ChartType>("bar");
+  const [stats, setStats] = useState<DashboardStats | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+  const [period, setPeriod] = useState<Period>("all");
 
   useEffect(() => {
     const ctrl = new AbortController();
     const fetch = async () => {
       try {
         const data = await dashboardService.getStats(period);
-        if (!ctrl.signal.aborted) { setStats(data); setError(null); }
+        if (!ctrl.signal.aborted) {
+          setStats(data);
+          setError(null);
+        }
       } catch (err) {
-        if (!ctrl.signal.aborted)
+        if (!ctrl.signal.aborted) {
           setError(err instanceof Error ? err.message : "Erro ao carregar dados.");
+        }
       } finally {
         if (!ctrl.signal.aborted) setLoading(false);
       }
     };
+
     void fetch();
     return () => { ctrl.abort(); };
   }, [period]);
 
-  const changePeriod = (p: Period) => { setLoading(true); setError(null); setPeriod(p); };
+  const changePeriod = (nextPeriod: Period) => {
+    setLoading(true);
+    setError(null);
+    setPeriod(nextPeriod);
+  };
 
   const safeChart = (stats?.chartData ?? [])
-    .filter((d) => d !== null && d !== undefined)
-    .map((d) => ({
-      ...d,
-      questions: typeof d.questions === "number" ? d.questions : Number(d.questions) || 0,
+    .filter(Boolean)
+    .map((item) => ({
+      ...item,
+      questions: typeof item.questions === "number" ? item.questions : Number(item.questions) || 0,
     }));
-  
-  const safePie = (stats?.pieData ?? [])
-    .filter((d) => d !== null && d !== undefined)
-    .map((d) => ({
-      ...d,
-      value: typeof d.value === "number" ? d.value : Number(d.value) || 0,
-    }))
-    .filter((d) => d.value > 0); 
-  
-  const safeTopQ = (stats?.topQuestionsData ?? [])
-    .filter((d) => d !== null && d !== undefined)
-    .map((d) => ({
-      ...d,
-      count: typeof d.count === "number" ? d.count : Number(d.count) || 0,
-    }));
-  
+  const safePie = normalizePie(stats?.pieData);
+  const safeTopQ = normalizeTop(stats?.topQuestionsData);
   const safeEmails = (stats?.emailsData ?? [])
-    .filter((d) => d !== null && d !== undefined)
-    .map((d) => ({
-      ...d,
-      count: typeof d.count === "number" ? d.count : Number(d.count) || 0,
-    }));
+    .filter(Boolean)
+    .map((item) => ({
+      ...item,
+      count: typeof item.count === "number" ? item.count : Number(item.count) || 0,
+    }))
+    .filter((item) => item.count > 0);
+  const safeCourse = normalizePie(stats?.courseData);
+  const safeUnresolved = normalizeTop(stats?.unresolvedSubjectsData);
+
+  const totalQuestions = (stats?.summary.pendingQuestions ?? 0) + (stats?.summary.resolvedQuestions ?? 0);
+  const totalSessions = stats?.summary.totalSessions ?? totalQuestions;
+  const autoAnswers = stats?.summary.answeredAutomatically ?? Math.max(totalSessions - totalQuestions, 0);
+  const resolutionRate = percent(stats?.summary.resolvedQuestions ?? 0, totalQuestions);
+  const satisfactionRate = stats?.summary.satisfactionRate ?? resolutionRate;
+  const escalationCount = safeEmails.reduce((sum, item) => sum + item.count, 0);
 
   const has = {
-    chart:  safeChart.length  > 0,
-    pie:    safePie.length    > 0,
-    topQ:   safeTopQ.length   > 0,
+    chart: safeChart.length > 0,
+    pie: safePie.length > 0,
+    topQ: safeTopQ.length > 0,
     emails: safeEmails.length > 0,
+    course: safeCourse.length > 0,
+    unresolved: safeUnresolved.length > 0,
   };
 
   return (
-    <section className="db-shell" aria-label="Painel de métricas">
+    <section className="db-shell" aria-label="Painel de métricas do chatbot institucional">
       <div className="db-toolbar">
         <div className="db-toolbar-left">
-          <button
-            type="button"
-            className="db-btn-ghost"
-            onClick={onNavigateToChat}
-          >
-            ← Chat
+          <button type="button" className="db-btn-ghost" onClick={onNavigateToChat}>
+            Voltar ao chat
           </button>
           <div className="db-toolbar-info">
-            <strong className="db-toolbar-title">Métricas</strong>
-            {user && <span className="db-toolbar-user">{user.name} · {user.role}</span>}
+            <strong className="db-toolbar-title">Dashboard institucional</strong>
+            <span className="db-toolbar-user">
+              {user ? `${user.name} · ${user.role}` : "Chatbot Fatec Jacareí"} · {PERIOD_HINTS[period]}
+            </span>
           </div>
         </div>
 
-        <div className="db-toolbar-right">
-          <label htmlFor="db-period" className="db-sr-only">Período</label>
-          <select
-            id="db-period"
-            className="db-select"
-            value={period}
-            onChange={(e) => changePeriod(e.target.value as Period)}
-          >
-            <option value="all">Todo o período</option>
-            <option value="30d">Últimos 30 dias</option>
-            <option value="7d">Últimos 7 dias</option>
-          </select>
+        <div className="db-period-tabs" role="group" aria-label="Selecionar período">
+          {(Object.keys(PERIOD_LABELS) as Period[]).map((option) => (
+            <button
+              key={option}
+              type="button"
+              className={`db-period-tab ${period === option ? "db-period-tab--active" : ""}`}
+              onClick={() => changePeriod(option)}
+              aria-pressed={period === option}
+            >
+              {PERIOD_LABELS[option]}
+            </button>
+          ))}
         </div>
       </div>
 
@@ -235,120 +445,116 @@ export function Dashboard({ user, onTabChange, onNavigateToChat }: DashboardProp
 
       {!loading && stats && !error && (
         <>
-          <div className="db-kpi-grid" role="list" aria-label="Indicadores">
+          <div className="db-kpi-grid" role="list" aria-label="Indicadores principais">
             <div role="listitem">
-              <StatCard label="Usuários" value={stats.summary.totalUsers} description="Administradores e secretaria" accent />
+              <StatCard
+                label="Atendimentos"
+                value={totalSessions}
+                description="Sessões de conversa no chatbot"
+                accent
+              />
             </div>
             <div role="listitem">
-              <StatCard label="Dúvidas Pendentes" value={stats.summary.pendingQuestions} description="Aguardando resposta" onClick={() => onTabChange("duvidas")} />
+              <StatCard
+                label="Respostas automáticas"
+                value={autoAnswers}
+                description={`${percent(autoAnswers, totalSessions)}% resolvidas pela árvore do seed`}
+              />
             </div>
             <div role="listitem">
-              <StatCard label="Dúvidas Resolvidas" value={stats.summary.resolvedQuestions} description="Respondidas no período" onClick={() => onTabChange("duvidas")} />
+              <StatCard
+                label="Dúvidas abertas"
+                value={stats.summary.pendingQuestions}
+                description="Aguardando secretaria"
+                onClick={() => onTabChange("duvidas")}
+              />
+            </div>
+            <div role="listitem">
+              <StatCard
+                label="Taxa de resolução"
+                value={resolutionRate}
+                suffix="%"
+                description={`${stats.summary.resolvedQuestions.toLocaleString("pt-BR")} dúvidas respondidas`}
+                onClick={() => onTabChange("duvidas")}
+              />
+            </div>
+          </div>
+
+          <div className="db-context-strip" aria-label="Resumo do contexto institucional">
+            <div className="db-context-item">
+              <span>Base do chatbot</span>
+              <strong>DSM, GEO, MARH, Não sou aluno e SIGA</strong>
+            </div>
+            <div className="db-context-item">
+              <span>Equipe interna</span>
+              <strong>{stats.summary.totalUsers.toLocaleString("pt-BR")} usuários no seed</strong>
+            </div>
+            <div className="db-context-item">
+              <span>Satisfação simulada</span>
+              <strong>{satisfactionRate}% avaliações positivas</strong>
+            </div>
+            <div className="db-context-item">
+              <span>Encaminhamentos</span>
+              <strong>{escalationCount.toLocaleString("pt-BR")} e-mails à secretaria</strong>
             </div>
           </div>
 
           <div className="db-charts-grid">
-            <ChartCard title="Volume de Dúvidas" subtitle="Envios por dia no período" headerRight={
-                <div className="db-toggle-group" role="group" aria-label="Tipo de gráfico">
-                  <button type="button" className={`db-toggle-btn ${chartType === "bar" ? "db-toggle-btn--active" : ""}`} onClick={() => setChartType("bar")} aria-pressed={chartType === "bar"} title="Gráfico de barras">
-                    <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor" aria-hidden="true">
-                      <rect x="0" y="4" width="3" height="10" rx="1" />
-                      <rect x="4" y="1" width="3" height="13" rx="1" />
-                      <rect x="8" y="5" width="3" height="9" rx="1" />
-                      <rect x="12" y="2" width="2" height="12" rx="1" />
-                    </svg>
-                  </button>
-                  <button type="button" className={`db-toggle-btn ${chartType === "line" ? "db-toggle-btn--active" : ""}`} onClick={() => setChartType("line")} aria-pressed={chartType === "line"} title="Gráfico de linha">
-                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                      <polyline points="1,11 4,6 7,8 10,3 13,5" />
-                    </svg>
-                  </button>
-                </div>
-              }
+            <ChartCard
+              title="Dúvidas encaminhadas"
+              subtitle="Quando o chatbot precisou registrar uma dúvida para atendimento humano"
             >
               {has.chart ? (
-                <ResponsiveContainer width="100%" height="100%">
-                  {chartType === "bar" ? (
-                    <BarChart data={safeChart} margin={{ top: 4, right: 8, left: -12, bottom: 0 }}>
-                      <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.06)" vertical={false} />
-                      <XAxis dataKey="day" tick={{ fill: "#888", fontSize: 11 }} axisLine={false} tickLine={false} />
-                      <YAxis allowDecimals={false} tick={{ fill: "#888", fontSize: 11 }} axisLine={false} tickLine={false} width={24} />
-                      <Tooltip {...TT} formatter={(v: number) => [v, "Dúvidas"]} />
-                      <Bar dataKey="questions" fill={BAR_COLOR} radius={[4, 4, 0, 0]} maxBarSize={44} isAnimationActive={false} />
-                    </BarChart>
-                  ) : (
-                    <LineChart data={safeChart} margin={{ top: 4, right: 8, left: -12, bottom: 0 }}>
-                      <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.06)" vertical={false} />
-                      <XAxis dataKey="day" tick={{ fill: "#888", fontSize: 11 }} axisLine={false} tickLine={false} />
-                      <YAxis allowDecimals={false} tick={{ fill: "#888", fontSize: 11 }} axisLine={false} tickLine={false} width={24} />
-                      <Tooltip {...TT} formatter={(v: number) => [v, "Dúvidas"]} />
-                      <Line type="monotone" dataKey="questions" stroke={LINE_COLOR} strokeWidth={2.5} dot={{ fill: LINE_COLOR, r: 4, strokeWidth: 0 }} activeDot={{ r: 6 }} isAnimationActive={false} />
-                    </LineChart>
-                  )}
-                </ResponsiveContainer>
+                <TrendBars
+                  data={safeChart.map((item) => ({ day: item.day, value: item.questions }))}
+                  unit="dúvidas"
+                />
               ) : (
                 <EmptyState />
               )}
             </ChartCard>
 
-            <ChartCard title="Status das Dúvidas" subtitle="Abertas × Resolvidas">
+            <ChartCard title="Fila da secretaria" subtitle="Status das dúvidas que saíram do fluxo automático">
               {has.pie ? (
-                <ResponsiveContainer width="100%" height="100%">
-                  <PieChart margin={{ top: 0, right: 0, bottom: 0, left: 0 }}>
-                    <Pie
-                      data={safePie}
-                      dataKey="value"
-                      nameKey="name"
-                      cx="50%"
-                      cy="50%"
-                      innerRadius={55}
-                      outerRadius={80}
-                      paddingAngle={safePie.length > 1 ? 3 : 0}
-                      isAnimationActive={false}
-                    >
-                      {safePie.map((_e, i) => (
-                        <Cell key={`pc-${i}`} fill={PIE_COLORS[i % PIE_COLORS.length]} />
-                      ))}
-                    </Pie>
-                    <Legend iconType="circle" iconSize={8} verticalAlign="bottom" height={36} formatter={(v: string) => <span style={{ color: "#555", fontSize: "0.8rem", fontWeight: 600 }}>{v}</span>} />
-                    <Tooltip contentStyle={TT.contentStyle} formatter={(v: number) => [v, "dúvidas"]} />
-                  </PieChart>
-                </ResponsiveContainer>
+                <StatusSummary data={safePie} />
               ) : (
                 <EmptyState />
               )}
             </ChartCard>
 
-            <ChartCard title="Top 5 Perguntas do Chatbot" subtitle="Opções mais acessadas pelos usuários" wide tall>
-              {has.topQ ? (
-                <ResponsiveContainer width="100%" height="100%">
-                  <BarChart data={safeTopQ} layout="vertical" margin={{ top: 4, right: 20, left: 150, bottom: 0 }}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.06)" horizontal={false} />
-                    <XAxis type="number" allowDecimals={false} tick={{ fill: "#888", fontSize: 11 }} axisLine={false} tickLine={false} />
-                    {/* CORREÇÃO DO BUG: Proteção para evitar erro de string no formatador */}
-                    <YAxis type="category" dataKey="title" width={140} tick={{ fill: "#444", fontSize: 11, fontWeight: 600 }} axisLine={false} tickLine={false} tickFormatter={(v: unknown) => (typeof v === "string" && v.length > 26 ? v.slice(0, 26) + "…" : String(v))} />
-                    <Tooltip {...TT} formatter={(v: number) => [v, "acessos"]} />
-                    <Bar dataKey="count" fill={TOP_COLOR} barSize={32} radius={[0, 4, 4, 0]} isAnimationActive={false} />
-                  </BarChart>
-                </ResponsiveContainer>
+            <ChartCard title="Entrada por público" subtitle="Primeira escolha feita na árvore do chatbot">
+              {has.course ? (
+                <AudienceBars data={safeCourse} />
               ) : (
-                <EmptyState message="Nenhuma interação com o chatbot registrada ainda." />
+                <EmptyState message="Sem logs de navegação por curso ainda." />
               )}
             </ChartCard>
 
-            <ChartCard title="E-mails Enviados" subtitle="Volume de disparos por dia">
+            <ChartCard title="Encaminhamentos à secretaria" subtitle="Dúvidas que geraram notificação por e-mail">
               {has.emails ? (
-                <ResponsiveContainer width="100%" height="100%">
-                  <BarChart data={safeEmails} margin={{ top: 4, right: 8, left: -12, bottom: 0 }}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.06)" vertical={false} />
-                    <XAxis dataKey="day" tick={{ fill: "#888", fontSize: 11 }} axisLine={false} tickLine={false} />
-                    <YAxis allowDecimals={false} tick={{ fill: "#888", fontSize: 11 }} axisLine={false} tickLine={false} width={24} />
-                    <Tooltip {...TT} formatter={(v: number) => [v, "e-mails"]} />
-                    <Bar dataKey="count" fill={EMAIL_COLOR} radius={[4, 4, 0, 0]} maxBarSize={44} isAnimationActive={false} />
-                  </BarChart>
-                </ResponsiveContainer>
+                <TrendBars
+                  data={safeEmails.map((item) => ({ day: item.day, value: item.count }))}
+                  unit="e-mails"
+                  tone="dark"
+                />
               ) : (
-                <EmptyState message="Integração de e-mail não configurada ainda (Issue #2)." />
+                <EmptyState message="Integração de e-mail ainda sem registros." />
+              )}
+            </ChartCard>
+
+            <ChartCard title="Assuntos mais acessados" subtitle="Nós do seed mais escolhidos pelos usuários" wide tall>
+              {has.topQ ? (
+                <TopicBars data={safeTopQ} unit="acessos" tone="red" />
+              ) : (
+                <EmptyState message="Nenhuma interação do chatbot registrada ainda." />
+              )}
+            </ChartCard>
+
+            <ChartCard title="Pendências por assunto" subtitle="Temas que mais precisam de resposta humana" wide>
+              {has.unresolved ? (
+                <TopicBars data={safeUnresolved} unit="abertas" tone="dark" />
+              ) : (
+                <EmptyState message="Nenhuma pendência aberta neste período." />
               )}
             </ChartCard>
           </div>

@@ -6,6 +6,9 @@ export type DashboardSummary = {
   totalUsers: number;
   pendingQuestions: number;
   resolvedQuestions: number;
+  totalSessions?: number;
+  answeredAutomatically?: number;
+  satisfactionRate?: number;
 };
 
 export type ChartDataPoint = {
@@ -34,10 +37,12 @@ export type DashboardStats = {
   pieData: PieDataPoint[];
   topQuestionsData: TopQuestionPoint[];
   emailsData: EmailDataPoint[];
+  courseData?: PieDataPoint[];
+  unresolvedSubjectsData?: TopQuestionPoint[];
 };
 
 export const dashboardService = {
-  getStats(period: Period = "all"): Promise<DashboardStats> {
+  getStats(period: Period = "all") {
     return apiRequest<DashboardStats>(
       `/admin/dashboard/stats?period=${period}`,
       { method: "GET", auth: true },

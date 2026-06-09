@@ -25,6 +25,10 @@ export async function getDashboardStats(req: Request, res: Response): Promise<vo
       chartResult,
       pieResult,
       topQuestionsResult,
+      sessionsResult,
+      satisfactionResult,
+      courseResult,
+      unresolvedSubjectsResult,
     ] = await Promise.all([
 
       // 1. Total de usuários cadastrados (sem filtro de período)
@@ -84,6 +88,63 @@ export async function getDashboardStats(req: Request, res: Response): Promise<vo
          ORDER BY COUNT(*) DESC
          LIMIT 5`,
       ),
+
+      pool.query<{ total_sessions: string; answered_automatically: string }>(
+        `SELECT
+           COUNT(*) AS total_sessions,
+           COUNT(*) FILTER (
+             WHERE jsonb_array_length(COALESCE(inquiry_ids, '[]'::jsonb)) = 0
+           ) AS answered_automatically
+         FROM interaction_logs
+         WHERE 1=1 ${dateFilter.replace(/created_at/g, "interaction_logs.created_at")}`,
+      ),
+
+      pool.query<{ positive: string; total: string }>(
+        `SELECT
+           COUNT(*) FILTER (WHERE flag = 'ATENDEU') AS positive,
+           COUNT(*) FILTER (WHERE flag IS NOT NULL) AS total
+         FROM interaction_logs
+         WHERE 1=1 ${dateFilter.replace(/created_at/g, "interaction_logs.created_at")}`,
+      ),
+
+      pool.query<{ name: string; value: string }>(
+        `SELECT name, COUNT(*) AS value
+         FROM (
+           SELECT NULLIF(navigation_flow -> 0 ->> 'title', '') AS name
+           FROM interaction_logs
+           WHERE jsonb_typeof(navigation_flow) = 'array'
+             AND jsonb_array_length(navigation_flow) > 0
+             ${dateFilter.replace(/created_at/g, "interaction_logs.created_at")}
+         ) first_steps
+         WHERE name IS NOT NULL
+         GROUP BY name
+         ORDER BY COUNT(*) DESC
+         LIMIT 5`,
+      ),
+
+      pool.query<{ title: string; count: string }>(
+        `SELECT
+           COALESCE(flow.title, LEFT(inquiries.question, 80)) AS title,
+           COUNT(*) AS count
+         FROM inquiries
+         LEFT JOIN LATERAL (
+           SELECT COALESCE(
+             NULLIF(interaction_logs.navigation_flow -> (jsonb_array_length(interaction_logs.navigation_flow) - 1) ->> 'title', ''),
+             NULLIF(interaction_logs.navigation_flow -> 0 ->> 'title', '')
+           ) AS title
+           FROM interaction_logs
+           WHERE interaction_logs.inquiry_ids @> jsonb_build_array(inquiries.id)
+             AND jsonb_typeof(interaction_logs.navigation_flow) = 'array'
+             AND jsonb_array_length(interaction_logs.navigation_flow) > 0
+           ORDER BY interaction_logs.created_at DESC
+           LIMIT 1
+         ) flow ON TRUE
+         WHERE inquiries.status = 'ABERTA'
+           ${dateFilter.replace(/created_at/g, "inquiries.created_at")}
+         GROUP BY COALESCE(flow.title, LEFT(inquiries.question, 80))
+         ORDER BY COUNT(*) DESC
+         LIMIT 5`,
+      ),
     ]);
 
     // 6. Volume de e-mails — retorna array vazio com segurança
@@ -112,12 +173,22 @@ export async function getDashboardStats(req: Request, res: Response): Promise<vo
     }
 
     const summary = summaryResult.rows[0];
+    const sessions = sessionsResult.rows[0];
+    const satisfaction = satisfactionResult.rows[0];
+    const satisfactionTotal = parseInt(satisfaction?.total ?? "0", 10);
+    const satisfactionRate =
+      satisfactionTotal > 0
+        ? Math.round((parseInt(satisfaction?.positive ?? "0", 10) / satisfactionTotal) * 100)
+        : 0;
 
     res.json({
       summary: {
         totalUsers:        parseInt(usersResult.rows[0]?.count ?? "0", 10),
         pendingQuestions:  parseInt(summary?.pending  ?? "0", 10),
         resolvedQuestions: parseInt(summary?.resolved ?? "0", 10),
+        totalSessions: parseInt(sessions?.total_sessions ?? "0", 10),
+        answeredAutomatically: parseInt(sessions?.answered_automatically ?? "0", 10),
+        satisfactionRate,
       },
       chartData: chartResult.rows.map((r) => ({
         day:       r.day,
@@ -128,6 +199,14 @@ export async function getDashboardStats(req: Request, res: Response): Promise<vo
         value: parseInt(r.value, 10),
       })),
       topQuestionsData: topQuestionsResult.rows.map((r) => ({
+        title: r.title,
+        count: parseInt(r.count, 10),
+      })),
+      courseData: courseResult.rows.map((r) => ({
+        name: r.name,
+        value: parseInt(r.value, 10),
+      })),
+      unresolvedSubjectsData: unresolvedSubjectsResult.rows.map((r) => ({
         title: r.title,
         count: parseInt(r.count, 10),
       })),
