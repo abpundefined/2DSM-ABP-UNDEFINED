@@ -14,6 +14,17 @@ export const authRepository = {
     return result.rows[0] || null;
   },
 
+  async listSecretariaUsers() {
+    const result = await pool.query(
+      `SELECT id, name, email, role, created_at, updated_at
+         FROM users
+        WHERE role = 'SECRETARIA'
+        ORDER BY name`,
+    );
+
+    return result.rows;
+  },
+
   async insertUser(name: string, email: string, password: string, role: UserRole) {
     const passwordEncoded = await hashPassword(password);
 
@@ -24,6 +35,32 @@ export const authRepository = {
       [name, email, passwordEncoded, role],
     );
     return result.rows[0] || null;
+  },
+
+  async updateSecretariaUser(id: string, name: string, email: string) {
+    const result = await pool.query(
+      `UPDATE users
+          SET name = $1,
+              email = $2
+        WHERE id = $3
+          AND role = 'SECRETARIA'
+        RETURNING id, name, email, role, created_at, updated_at`,
+      [name, email, id],
+    );
+
+    return result.rows[0] ?? null;
+  },
+
+  async deleteSecretariaUser(id: string) {
+    const result = await pool.query(
+      `DELETE FROM users
+        WHERE id = $1
+          AND role = 'SECRETARIA'
+        RETURNING id`,
+      [id],
+    );
+
+    return (result.rowCount ?? 0) > 0;
   },
 
   async saveResetToken(email: string, token: string, expiresAt: Date) {

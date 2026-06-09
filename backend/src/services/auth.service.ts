@@ -36,4 +36,16 @@ export const authService = {
 
     return authRepository.insertUser(name, email, password, role);
   },
+
+  async listSecretariaUsers() {
+    return authRepository.listSecretariaUsers();
+  },
+
+  async updateSecretariaUser(id: string, name: string, email: string) {
+    return authRepository.updateSecretariaUser(id, name, email);
+  },
+
+  async deleteSecretariaUser(id: string) {
+    return authRepository.deleteSecretariaUser(id);
+  },
 };

@@ -32,4 +32,45 @@ export const emailService = {
 
     await transporter.sendMail(mailOptions);
   },
+  async sendInquiryNotification(data: {
+    requesterName: string;
+    requesterEmail: string;
+    question: string;
+  }) {
+    const to = process.env.SECRETARIA_EMAIL || "secretaria@fatec.sp.gov.br";
+
+    const mailOptions = {
+      from: '"Secretaria Digital Fatec" <no-reply@fatec.sp.gov.br>',
+      to,
+      subject: "Nova dúvida enviada - Secretaria Digital Fatec",
+      text: `
+Nova dúvida enviada pelo autoatendimento.
+
+Nome: ${data.requesterName}
+E-mail: ${data.requesterEmail}
+
+Dúvida:
+${data.question}
+    `,
+      html: `
+      <div style="font-family: Arial, sans-serif; padding: 20px; color: #333;">
+        <h2 style="color: #bf0000;">Nova dúvida enviada</h2>
+
+        <p><strong>Nome:</strong> ${data.requesterName}</p>
+        <p><strong>E-mail:</strong> ${data.requesterEmail}</p>
+
+        <hr />
+
+        <p><strong>Dúvida:</strong></p>
+        <p>${data.question}</p>
+
+        <p style="font-size: 12px; color: #777; margin-top: 30px;">
+          Esta mensagem foi enviada automaticamente pelo sistema de autoatendimento.
+        </p>
+      </div>
+    `,
+    };
+
+    await transporter.sendMail(mailOptions);
+  },
 };
