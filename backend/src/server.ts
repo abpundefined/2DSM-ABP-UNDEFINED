@@ -4,6 +4,7 @@ import navigationRoutes from "./routes/navigation.routes";
 import inquiryRoutes from "./routes/inquiry.routes";
 import authRouter from "./routes/auth.routes";
 import logsRoutes from "./routes/logs.routes";
+import dashboardRouter from "./routes/dashboard.routes";
 
 const app = express();
 const corsOrigin = process.env.CORS_ORIGIN;
@@ -17,6 +18,7 @@ app.use("/navigation", navigationRoutes);
 app.use("/inquiries", inquiryRoutes); 
 app.use("/auth", authRouter); 
 app.use("/logs", logsRoutes);
+app.use("/admin/dashboard", dashboardRouter);
 
 app.get("/", (req, res) => {
   res.json({ message: "Backend funcionando" });

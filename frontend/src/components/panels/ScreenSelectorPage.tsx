@@ -7,12 +7,14 @@ import {
   type AdminNavigationNode,
   type NavigationNodePayload,
 } from "../../services/navigationAdminService";
+import { Dashboard } from "../admin/Dashboard";
 
-type AdminTab = "perguntas" | "duvidas" | "logs";
+type AdminTab = "dashboard" | "perguntas" | "duvidas" | "logs";
 type QuestionFormMode = "hidden" | "create" | "edit";
 
 type ScreenSelectorPageProps = {
   user: AuthUser | null;
+  onNavigateToChat: () => void;
 };
 
 type QuestionFormState = {
@@ -40,6 +42,7 @@ const emptyQuestionForm: QuestionFormState = {
 };
 
 const tabs: Array<{ key: AdminTab; label: string }> = [
+  { key: "dashboard", label: "Dashboard" },
   { key: "perguntas", label: "Perguntas" },
   { key: "duvidas", label: "Duvidas" },
   { key: "logs", label: "Logs" },
@@ -108,8 +111,8 @@ async function fetchAdminData(isAdmin: boolean) {
   return { questionData, inquiryData, logData };
 }
 
-export function ScreenSelectorPage({ user }: ScreenSelectorPageProps) {
-  const [activeTab, setActiveTab] = useState<AdminTab>("duvidas");
+export function ScreenSelectorPage({ user, onNavigateToChat }: ScreenSelectorPageProps) {
+  const [activeTab, setActiveTab] = useState<AdminTab>("dashboard");
   const [questions, setQuestions] = useState<AdminNavigationNode[]>([]);
   const [inquiries, setInquiries] = useState<Inquiry[]>([]);
   const [logs, setLogs] = useState<InteractionLog[]>([]);
@@ -426,6 +429,14 @@ export function ScreenSelectorPage({ user }: ScreenSelectorPageProps) {
 
         {message && <div className="sd-admin-message">{message}</div>}
         {loading && <div className="sd-admin-message">Carregando dados...</div>}
+
+        {activeTab === "dashboard" && (
+          <Dashboard
+            user={user}
+            onTabChange={setActiveTab}
+            onNavigateToChat={onNavigateToChat}
+          />
+        )}
 
         {!loading && activeTab === "perguntas" && (
           <div className="sd-questions-manager">
