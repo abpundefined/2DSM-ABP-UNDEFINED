@@ -58,7 +58,12 @@ export default function App() {
             }}
           />
         )}
-        {currentScreen === "admin" && <ScreenSelectorPage user={user} />}
+        {currentScreen === "admin" && (
+          <ScreenSelectorPage
+            user={user}
+            onNavigateToChat={() => setCurrentScreen("chat")}
+          />
+        )}
       </main>
 
       <footer>

@@ -8,12 +8,19 @@ import {
   type NavigationNodePayload,
 } from "../../services/navigationAdminService";
 import { userAdminService, type ManagedUser } from "../../services/userAdminService";
+import { Dashboard } from "./admin/Dashboard";
 
-type AdminTab = "perguntas" | "duvidas" | "logs" | "usuarios";
+type AdminTab =
+  | "dashboard"
+  | "perguntas"
+  | "duvidas"
+  | "logs"
+  | "usuarios";
 type QuestionFormMode = "hidden" | "create" | "edit";
 
 type ScreenSelectorPageProps = {
   user: AuthUser | null;
+  onNavigateToChat: () => void;
 };
 
 type QuestionFormState = {
@@ -53,6 +60,7 @@ const emptyUserForm: UserFormState = {
 };
 
 const tabs: Array<{ key: AdminTab; label: string }> = [
+  { key: "dashboard", label: "Dashboard" },
   { key: "perguntas", label: "Perguntas" },
   { key: "duvidas", label: "Duvidas" },
   { key: "logs", label: "Logs" },
@@ -123,8 +131,8 @@ async function fetchAdminData(isAdmin: boolean) {
   return { questionData, inquiryData, logData, userData };
 }
 
-export function ScreenSelectorPage({ user }: ScreenSelectorPageProps) {
-  const [activeTab, setActiveTab] = useState<AdminTab>("duvidas");
+export function ScreenSelectorPage({ user, onNavigateToChat }: ScreenSelectorPageProps) {
+  const [activeTab, setActiveTab] = useState<AdminTab>("dashboard");
   const [questions, setQuestions] = useState<AdminNavigationNode[]>([]);
   const [inquiries, setInquiries] = useState<Inquiry[]>([]);
   const [logs, setLogs] = useState<InteractionLog[]>([]);
@@ -519,6 +527,14 @@ export function ScreenSelectorPage({ user }: ScreenSelectorPageProps) {
 
         {message && <div className="sd-admin-message">{message}</div>}
         {loading && <div className="sd-admin-message">Carregando dados...</div>}
+
+        {activeTab === "dashboard" && (
+          <Dashboard
+            user={user}
+            onTabChange={setActiveTab}
+            onNavigateToChat={onNavigateToChat}
+          />
+        )}
 
         {!loading && activeTab === "perguntas" && (
           <div className="sd-questions-manager">
