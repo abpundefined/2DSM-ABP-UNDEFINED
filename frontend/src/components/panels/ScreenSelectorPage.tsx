@@ -8,7 +8,7 @@ import {
   type NavigationNodePayload,
 } from "../../services/navigationAdminService";
 import { userAdminService, type ManagedUser } from "../../services/userAdminService";
-import { Dashboard } from "./admin/Dashboard";
+import { Dashboard } from "../admin/Dashboard";
 
 type AdminTab =
   | "dashboard"

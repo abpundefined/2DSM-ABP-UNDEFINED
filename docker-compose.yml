@@ -33,8 +33,8 @@ services:
       JWT_EXPIRES_IN: 8h
       SMTP_HOST: sandbox.smtp.mailtrap.io
       SMTP_PORT: 2525
-      SMTP_USER: 4b59c36739dc4d
-      SMTP_PASS: c10f624c56492b
+      SMTP_USER: 0a89b9129b91d3
+      SMTP_PASS: cad2356c1c016b
       # SMTP_HOST: smtp.gmail.com
       # SMTP_PORT: 587
       # SMTP_USER: o_email_do_projeto@gmail.com
