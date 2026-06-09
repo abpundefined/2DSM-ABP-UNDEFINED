@@ -25,6 +25,7 @@
     <li><a href="#bancodedados">🗃️ Banco de dados</a></li>
     <li><a href="#casosdeuso">📊 Diagrama de casos de uso</a></li>
     <li><a href="#classes">📊 Diagrama de classes</a></li>
+    <li><a href="#sequencia">📊 Diagrama de sequência</a></li>
     </ul>
     </li>
     <li>
@@ -899,7 +900,7 @@ docker-compose up --build
     <td>5</td>
     <td>🔴 Alta</td>
     <td>Pedro</td>
-    <td>⏳</td>
+    <td>✅</td>
     <td>RNF04</td>
 </tr>
 
@@ -1106,3 +1107,8 @@ docker-compose up --build
 
 <h3 id="classes">Diagrama de classes</h3>
 <p><img src="./docs/sprint2/DiagramaDeClasses.png" alt="Diagrama de Classes"></p>
+
+<h3 id="sequencia">Diagramas de sequência</h3>
+<p><img src="./docs/sprint3/DiagramaSequencia1.jpeg" alt="Diagrama de Sequência"></p>
+
+<p><img src="./docs/sprint3/DiagramaSequencia2.jpeg" alt="Diagrama de Sequência"></p>
