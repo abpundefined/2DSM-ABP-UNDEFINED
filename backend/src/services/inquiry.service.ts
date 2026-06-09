@@ -1,18 +1,28 @@
-import { inquiryRepository, type InquiryCreateData, type InquiryStatus, } from "../repositories/inquiry.repository";
+import {
+  inquiryRepository,
+  type InquiryCreateData,
+  type InquiryStatus,
+} from "../repositories/inquiry.repository";
+
+import { emailService } from "./email.service";
 
 export const inquiryService = {
-  // Camada de serviço para encapsular a lógica de negócios e impedir que
-  // o controller acesse diretamente o repositório.
   async createInquiry(data: InquiryCreateData) {
-    return inquiryRepository.createInquiry(data);
+    const inquiry = await inquiryRepository.createInquiry(data);
+
+    await emailService.sendInquiryNotification({
+      requesterName: data.requester_name,
+      requesterEmail: data.requester_email,
+      question: data.question,
+    });
+
+    return inquiry;
   },
 
-  // Repassa a listagem para o repositorio, mantendo o controller sem SQL.
   async findAll() {
     return inquiryRepository.findAll();
   },
 
-  // Centraliza a alteracao de status para preservar a separacao entre camadas.
   async updateStatus(id: number, status: InquiryStatus, answeredBy: string | null) {
     return inquiryRepository.updateStatus(id, status, answeredBy);
   },

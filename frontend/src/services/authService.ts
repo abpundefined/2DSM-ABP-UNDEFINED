@@ -47,4 +47,18 @@ export const authService = {
     localStorage.removeItem("token");
     localStorage.removeItem(USER_STORAGE_KEY);
   },
+
+  recoverPassword(email: string) {
+    return apiRequest<{ message: string }>("/auth/forgot-password", {
+      method: "POST",
+      body: JSON.stringify({ email }),
+    });
+  },
+
+  resetPassword(email: string, code: string, newPassword: string) {
+    return apiRequest<{ message: string }>("/auth/reset-password", {
+      method: "POST",
+      body: JSON.stringify({ email, code, newPassword }),
+    });
+  },
 };

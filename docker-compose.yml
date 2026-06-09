@@ -26,16 +26,24 @@ services:
     container_name: abp_backend
     environment:
       NODE_ENV: development
-      PORT: ${BACKEND_PORT:-3000}
-      DATABASE_URL: postgres://${POSTGRES_USER:-secretaria_user}:${POSTGRES_PASSWORD:-secretaria_pass}@postgres:5432/${POSTGRES_DB:-secretaria_db}
-      JWT_SECRET: ${JWT_SECRET:-change-me-in-production}
-      JWT_EXPIRES_IN: ${JWT_EXPIRES_IN:-8h}
-      CORS_ORIGIN: http://localhost:${FRONTEND_PORT:-5173}
+      PORT: 3000
+      DATABASE_URL: postgres://secretaria_user:secretaria_pass@postgres:5432/secretaria_db
+      CORS_ORIGIN: http://localhost:5173
+      JWT_SECRET: fatec_jacarei_super_secreta_2026_abp_oficial
+      JWT_EXPIRES_IN: 8h
+      SMTP_HOST: sandbox.smtp.mailtrap.io
+      SMTP_PORT: 2525
+      SMTP_USER: 4b59c36739dc4d
+      SMTP_PASS: c10f624c56492b
+      # SMTP_HOST: smtp.gmail.com
+      # SMTP_PORT: 587
+      # SMTP_USER: o_email_do_projeto@gmail.com
+      # SMTP_PASS: aquela_senha_de_16_letras_gerada_pelo_google
     depends_on:
       postgres:
         condition: service_healthy
     ports:
-      - "${BACKEND_PORT:-3000}:3000"
+      - "3000:3000"
     volumes:
       - ./backend:/app
       - backend_node_modules:/app/node_modules
@@ -88,3 +96,4 @@ volumes:
 networks:
   internal_net:
     driver: bridge
+

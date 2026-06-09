@@ -854,6 +854,14 @@ select:-webkit-autofill {
   font-weight: 700;
 }
 
+.sd-auth-success {
+  padding: 12px 14px;
+  border-radius: 6px;
+  background: #d1fae5;
+  color: #065f46;
+  font-weight: 700;
+}
+
 .sd-btn-primary,
 .sd-secondary-button,
 .sd-danger-button {
@@ -1542,4 +1550,74 @@ select:-webkit-autofill {
   .sd-admin-tabs {
     grid-template-columns: 1fr;
   }
+}
+
+/* =========================
+   UI/UX - LOGIN E SENHA
+========================= */
+
+.sd-password-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.sd-forgot-password-link,
+.sd-back-link {
+  background: transparent;
+  border: none;
+  color: var(--sd-red);
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0;
+  text-decoration: none;
+}
+
+.sd-forgot-password-link:hover,
+.sd-back-link:hover {
+  text-decoration: underline;
+  color: var(--sd-red-dark);
+}
+
+.sd-back-link {
+  display: inline-block;
+  margin-top: 12px;
+  width: 100%;
+  text-align: center;
+  font-size: 0.95rem;
+}
+
+.sd-password-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.sd-password-input {
+  width: 100%;
+  padding-right: 42px !important;
+}
+
+.sd-toggle-password {
+  position: absolute;
+  right: 12px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--sd-muted);
+}
+
+.sd-toggle-password:hover {
+  color: var(--sd-text);
+}
+
+.sd-toggle-password svg {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
 }

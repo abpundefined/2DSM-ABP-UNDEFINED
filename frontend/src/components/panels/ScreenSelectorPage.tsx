@@ -7,12 +7,20 @@ import {
   type AdminNavigationNode,
   type NavigationNodePayload,
 } from "../../services/navigationAdminService";
+import { userAdminService, type ManagedUser } from "../../services/userAdminService";
+import { Dashboard } from "./admin/Dashboard";
 
-type AdminTab = "perguntas" | "duvidas" | "logs";
+type AdminTab =
+  | "dashboard"
+  | "perguntas"
+  | "duvidas"
+  | "logs"
+  | "usuarios";
 type QuestionFormMode = "hidden" | "create" | "edit";
 
 type ScreenSelectorPageProps = {
   user: AuthUser | null;
+  onNavigateToChat: () => void;
 };
 
 type QuestionFormState = {
@@ -27,6 +35,12 @@ type QuestionFormState = {
   is_active: boolean;
 };
 
+type UserFormState = {
+  name: string;
+  email: string;
+  password: string;
+};
+
 const emptyQuestionForm: QuestionFormState = {
   parent_id: "",
   title: "",
@@ -39,10 +53,18 @@ const emptyQuestionForm: QuestionFormState = {
   is_active: true,
 };
 
+const emptyUserForm: UserFormState = {
+  name: "",
+  email: "",
+  password: "",
+};
+
 const tabs: Array<{ key: AdminTab; label: string }> = [
+  { key: "dashboard", label: "Dashboard" },
   { key: "perguntas", label: "Perguntas" },
   { key: "duvidas", label: "Duvidas" },
   { key: "logs", label: "Logs" },
+  { key: "usuarios", label: "Usuarios" },
 ];
 
 function toNullableText(value: string) {
@@ -99,28 +121,33 @@ function createSlugFromTitle(title: string) {
 }
 
 async function fetchAdminData(isAdmin: boolean) {
-  const [questionData, inquiryData, logData] = await Promise.all([
+  const [questionData, inquiryData, logData, userData] = await Promise.all([
     navigationAdminService.list(),
     inquiryService.list(),
     isAdmin ? logService.list() : Promise.resolve<InteractionLog[]>([]),
+    isAdmin ? userAdminService.list() : Promise.resolve<ManagedUser[]>([]),
   ]);
 
-  return { questionData, inquiryData, logData };
+  return { questionData, inquiryData, logData, userData };
 }
 
-export function ScreenSelectorPage({ user }: ScreenSelectorPageProps) {
-  const [activeTab, setActiveTab] = useState<AdminTab>("duvidas");
+export function ScreenSelectorPage({ user, onNavigateToChat }: ScreenSelectorPageProps) {
+  const [activeTab, setActiveTab] = useState<AdminTab>("dashboard");
   const [questions, setQuestions] = useState<AdminNavigationNode[]>([]);
   const [inquiries, setInquiries] = useState<Inquiry[]>([]);
   const [logs, setLogs] = useState<InteractionLog[]>([]);
+  const [users, setUsers] = useState<ManagedUser[]>([]);
   const [questionSearch, setQuestionSearch] = useState("");
   const [questionForm, setQuestionForm] = useState<QuestionFormState>(emptyQuestionForm);
   const [questionFormMode, setQuestionFormMode] = useState<QuestionFormMode>("hidden");
+  const [userForm, setUserForm] = useState<UserFormState>(emptyUserForm);
   const [editingQuestionId, setEditingQuestionId] = useState<number | null>(null);
+  const [editingUserId, setEditingUserId] = useState<string | null>(null);
   const [formContextQuestion, setFormContextQuestion] = useState<AdminNavigationNode | null>(null);
   const [expandedQuestionIds, setExpandedQuestionIds] = useState<Set<number>>(() => new Set());
   const [loading, setLoading] = useState(true);
   const [savingQuestion, setSavingQuestion] = useState(false);
+  const [savingUser, setSavingUser] = useState(false);
   const [updatingInquiryId, setUpdatingInquiryId] = useState<number | null>(null);
   const [message, setMessage] = useState<string | null>(null);
   const questionFormRef = useRef<HTMLElement | null>(null);
@@ -159,10 +186,11 @@ export function ScreenSelectorPage({ user }: ScreenSelectorPageProps) {
     setMessage(null);
 
     try {
-      const { questionData, inquiryData, logData } = await fetchAdminData(canManageQuestions);
+      const { questionData, inquiryData, logData, userData } = await fetchAdminData(canManageQuestions);
       setQuestions(questionData);
       setInquiries(inquiryData);
       setLogs(logData);
+      setUsers(userData);
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : "Nao foi possivel carregar o painel.";
       setMessage(errorMessage);
@@ -176,13 +204,14 @@ export function ScreenSelectorPage({ user }: ScreenSelectorPageProps) {
 
     async function loadInitialData() {
       try {
-        const { questionData, inquiryData, logData } = await fetchAdminData(user?.role === "ADMIN");
+        const { questionData, inquiryData, logData, userData } = await fetchAdminData(user?.role === "ADMIN");
 
         if (!isActive) return;
 
         setQuestions(questionData);
         setInquiries(inquiryData);
         setLogs(logData);
+        setUsers(userData);
       } catch (error) {
         if (!isActive) return;
 
@@ -205,6 +234,11 @@ export function ScreenSelectorPage({ user }: ScreenSelectorPageProps) {
     setEditingQuestionId(null);
     setFormContextQuestion(null);
     setQuestionFormMode("hidden");
+  };
+
+  const resetUserForm = () => {
+    setUserForm(emptyUserForm);
+    setEditingUserId(null);
   };
 
   const startCreatingQuestion = (parentId: number | null = null) => {
@@ -308,6 +342,67 @@ export function ScreenSelectorPage({ user }: ScreenSelectorPageProps) {
     }
   };
 
+  const startEditingUser = (managedUser: ManagedUser) => {
+    setEditingUserId(managedUser.id);
+    setUserForm({
+      name: managedUser.name,
+      email: managedUser.email,
+      password: "",
+    });
+    setActiveTab("usuarios");
+  };
+
+  const handleUserSubmit = async (event: FormEvent) => {
+    event.preventDefault();
+    setSavingUser(true);
+    setMessage(null);
+
+    try {
+      if (editingUserId) {
+        await userAdminService.update(editingUserId, {
+          name: userForm.name.trim(),
+          email: userForm.email.trim().toLowerCase(),
+        });
+        setMessage("Usuario atualizado com sucesso.");
+      } else {
+        if (!userForm.password.trim()) {
+          setMessage("Senha e obrigatoria para criar o usuario.");
+          setSavingUser(false);
+          return;
+        }
+
+        await userAdminService.create({
+          name: userForm.name.trim(),
+          email: userForm.email.trim().toLowerCase(),
+          password: userForm.password,
+        });
+        setMessage("Usuario criado com sucesso.");
+      }
+
+      resetUserForm();
+      await loadAdminData();
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : "Nao foi possivel salvar o usuario.";
+      setMessage(errorMessage);
+    } finally {
+      setSavingUser(false);
+    }
+  };
+
+  const removeUser = async (id: string) => {
+    setMessage(null);
+
+    try {
+      await userAdminService.remove(id);
+      setMessage("Usuario excluido.");
+      if (editingUserId === id) resetUserForm();
+      await loadAdminData();
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : "Nao foi possivel excluir o usuario.";
+      setMessage(errorMessage);
+    }
+  };
+
   const renderQuestionTree = (parentId: number | null, level = 0): ReactNode => {
     const children = getQuestionChildren(parentId);
 
@@ -400,7 +495,13 @@ export function ScreenSelectorPage({ user }: ScreenSelectorPageProps) {
     <main className="sd-admin-shell">
       <aside className="sd-admin-tabs" aria-label="Telas administrativas">
         {tabs
-          .filter((tab) => tab.key !== "logs" || user?.role === "ADMIN")
+          .filter((tab) => {
+            if (user?.role !== "ADMIN" && (tab.key === "logs" || tab.key === "usuarios")) {
+              return false;
+            }
+
+            return true;
+          })
           .map((tab) => (
             <button
               key={tab.key}
@@ -426,6 +527,14 @@ export function ScreenSelectorPage({ user }: ScreenSelectorPageProps) {
 
         {message && <div className="sd-admin-message">{message}</div>}
         {loading && <div className="sd-admin-message">Carregando dados...</div>}
+
+        {activeTab === "dashboard" && (
+          <Dashboard
+            user={user}
+            onTabChange={setActiveTab}
+            onNavigateToChat={onNavigateToChat}
+          />
+        )}
 
         {!loading && activeTab === "perguntas" && (
           <div className="sd-questions-manager">
@@ -669,6 +778,100 @@ export function ScreenSelectorPage({ user }: ScreenSelectorPageProps) {
                 </article>
               ))}
               {inquiries.length === 0 && <p>Nenhuma duvida enviada ate o momento.</p>}
+            </div>
+          </section>
+        )}
+
+        {!loading && activeTab === "usuarios" && user?.role === "ADMIN" && (
+          <section className="sd-admin-section">
+            <div className="sd-question-toolbar">
+              <div>
+                <h2>Usuarios da Secretaria</h2>
+                <p>Crie, edite e remova acessos do perfil SECRETARIA.</p>
+              </div>
+            </div>
+
+            <form className="sd-admin-form" onSubmit={handleUserSubmit}>
+              <div className="sd-form-block">
+                <label>
+                  Nome
+                  <input
+                    value={userForm.name}
+                    onChange={(event) => setUserForm({ ...userForm, name: event.target.value })}
+                    required
+                  />
+                </label>
+
+                <label>
+                  Email
+                  <input
+                    type="email"
+                    value={userForm.email}
+                    onChange={(event) => setUserForm({ ...userForm, email: event.target.value })}
+                    required
+                  />
+                </label>
+
+                {!editingUserId && (
+                  <label>
+                    Senha inicial
+                    <input
+                      type="password"
+                      value={userForm.password}
+                      onChange={(event) => setUserForm({ ...userForm, password: event.target.value })}
+                      required
+                    />
+                  </label>
+                )}
+              </div>
+
+              <div className="sd-admin-actions">
+                <button className="sd-btn-primary" type="submit" disabled={savingUser}>
+                  {savingUser ? "Salvando..." : editingUserId ? "Salvar" : "Criar usuario"}
+                </button>
+
+                <button className="sd-secondary-button" type="button" onClick={resetUserForm}>
+                  Cancelar
+                </button>
+              </div>
+            </form>
+
+            <div className="sd-admin-list">
+              {users.map((managedUser) => (
+                <article className="sd-admin-card" key={managedUser.id}>
+                  <div className="sd-admin-card-top">
+                    <strong>{managedUser.name}</strong>
+                    <span>{managedUser.role}</span>
+                  </div>
+
+                  <p>{managedUser.email}</p>
+                  <small>Criado em {formatDate(managedUser.created_at)}</small>
+
+                  <div className="sd-admin-actions">
+                    <button
+                      type="button"
+                      className="sd-secondary-button"
+                      onClick={() => startEditingUser(managedUser)}
+                    >
+                      Editar
+                    </button>
+
+                    <button
+                      type="button"
+                      className="sd-danger-button"
+                      onClick={() => {
+                        if (window.confirm(`Excluir "${managedUser.name}"?`)) {
+                          void removeUser(managedUser.id);
+                        }
+                      }}
+                    >
+                      Excluir
+                    </button>
+                  </div>
+                </article>
+              ))}
+
+              {users.length === 0 && <p>Nenhum usuario da secretaria cadastrado.</p>}
             </div>
           </section>
         )}

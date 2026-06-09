@@ -32,5 +32,33 @@ export function useAuth() {
     setUser(null);
   };
 
-  return { token, user, error, loading, login, logout, isAuthenticated: !!token };
+  const recoverPassword = async (email: string) => {
+    setLoading(true);
+    setError(null);
+    try {
+      await authService.recoverPassword(email);
+    } catch (err) {
+      const errorInstance = err as Error;
+      setError(errorInstance.message || "Erro ao solicitar recuperação de senha.");
+      throw err;
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const resetPassword = async (email: string, code: string, newPassword: string) => {
+    setLoading(true);
+    setError(null);
+    try {
+      await authService.resetPassword(email, code, newPassword);
+    } catch (err) {
+      const errorInstance = err as Error;
+      setError(errorInstance.message || "Erro ao redefinir a senha.");
+      throw err;
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return { token, user, error, loading, login, logout, recoverPassword, resetPassword, isAuthenticated: !!token };
 }

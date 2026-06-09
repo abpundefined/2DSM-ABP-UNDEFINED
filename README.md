@@ -25,6 +25,7 @@
     <li><a href="#bancodedados">🗃️ Banco de dados</a></li>
     <li><a href="#casosdeuso">📊 Diagrama de casos de uso</a></li>
     <li><a href="#classes">📊 Diagrama de classes</a></li>
+    <li><a href="#sequencia">📊 Diagrama de sequência</a></li>
     </ul>
     </li>
     <li>
@@ -874,76 +875,141 @@ docker-compose up --build
 <hr>
 
 <h3 id="sprint3">⏱️ Sprint 3 — Finalização e Qualidade 🥉</h3>
+
 <h4 id="backlogsprint3">📋 Backlog Sprint 3</h4>
+
 <table>
-    <tr>
-        <th>ID</th>
-        <th>Nome</th>
-        <th>Pontos</th>
-        <th>Responsável</th>
-        <th>Status</th>
-        <th>Requisitos Atendidos</th>
-    </tr>
-    <tr>
-        <td colspan="6"><strong>📖 Levantamento e Modelagem</strong></td>
-    </tr>
-    <tr>
-        <td>59</td>
-        <td>Criação do Diagrama de Sequência</td>
-        <td>5</td>
-        <td></td>
-        <td>⏳</td>
-        <td>RNF04</td>
-    </tr>
-    <tr>
-        <td colspan="6"><strong>🛡️ Finalização de Segurança</strong></td>
-    </tr>
-    <tr>
-        <td>60</td>
-        <td>Implementar logout de usuário</td>
-        <td>2</td>
-        <td></td>
-        <td>⏳</td>
-        <td>RF09</td>
-    </tr>
-    <tr>
-        <td>61</td>
-        <td>Melhorar tratamento de erros de autenticação</td>
-        <td>2</td>
-        <td></td>
-        <td>⏳</td>
-        <td>RF09, RF11</td>
-    </tr>
-   <tr>
-        <td colspan="6"><strong>📊 Monitoramento</strong></td>
-    </tr>
-    <tr>
-        <td>62</td>
-        <td>Monitorar fluxo de utilização via logs</td>
-        <td>2</td>
-        <td></td>
-        <td>⏳</td>
-        <td>RF08</td>
-    </tr>
-    <tr>
-        <td>63</td>
-        <td>Testar persistência dos dados de log e feedback</td>
-        <td>2</td>
-        <td></td>
-        <td>⏳</td>
-        <td>RF07, RF08</td>
-    </tr>
-    <tr>
-        <td colspan="6"><strong>📨 Sistema de Dúvidas e Encerramento</strong></td>
-    </tr>
-    <tr>
-        <td>64</td>
-        <td>Enviar resposta da dúvida pela secretaria</td>
-        <td>3</td>
-        <td></td>
-        <td>⏳</td>
-        <td>RF06</td>
-    </tr>
+
+<tr>
+    <th>ID</th>
+    <th>Nome</th>
+    <th>Pontos</th>
+    <th>Prioridade</th>
+    <th>Responsável</th>
+    <th>Status</th>
+    <th>Requisitos Atendidos</th>
+</tr>
+
+<tr>
+    <td colspan="7"><strong>📖 Documentação e Modelagem</strong></td>
+</tr>
+
+<tr>
+    <td>59</td>
+    <td>Criação dos Diagramas de Sequência</td>
+    <td>5</td>
+    <td>🔴 Alta</td>
+    <td>Pedro</td>
+    <td>✅</td>
+    <td>RNF04</td>
+</tr>
+
+<tr>
+    <td colspan="7"><strong>👥 Gestão de Usuários</strong></td>
+</tr>
+
+<tr>
+    <td>60</td>
+    <td>Implementação da tela de gerenciamento de usuários</td>
+    <td>5</td>
+    <td>🔴 Alta</td>
+    <td>Marcus</td>
+    <td>✅</td>
+    <td>RF09</td>
+</tr>
+
+<tr>
+    <td>61</td>
+    <td>Implementação das operações de cadastro, edição e remoção de usuários</td>
+    <td>5</td>
+    <td>🔴 Alta</td>
+    <td>Marcus</td>
+    <td>✅</td>
+    <td>RF09</td>
+</tr>
+
+<tr>
+    <td colspan="7"><strong>📊 Dashboard e Monitoramento</strong></td>
+</tr>
+
+<tr>
+    <td>62</td>
+    <td>Implementação do dashboard administrativo</td>
+    <td>5</td>
+    <td>🟡 Média</td>
+    <td>Rainan</td>
+    <td>✅</td>
+    <td>RF08</td>
+</tr>
+
+<tr>
+    <td>63</td>
+    <td>Implementação da visualização de logs administrativos</td>
+    <td>3</td>
+    <td>🟡 Média</td>
+    <td>Joâo</td>
+    <td>✅</td>
+    <td>RF08</td>
+</tr>
+
+<tr>
+    <td colspan="7"><strong>📨 Sistema de Dúvidas</strong></td>
+</tr>
+
+<tr>
+    <td>64</td>
+    <td>Integração do envio de dúvidas por e-mail para a secretaria</td>
+    <td>5</td>
+    <td>🔴 Alta</td>
+    <td>Nadla</td>
+    <td>✅</td>
+    <td>RF06</td>
+</tr>
+
+<tr>
+    <td>65</td>
+    <td>Integração do serviço de e-mail ao fluxo de abertura de dúvidas</td>
+    <td>3</td>
+    <td>🔴 Alta</td>
+    <td>Marcus</td>
+    <td>✅</td>
+    <td>RF06</td>
+</tr>
+
+<tr>
+    <td colspan="7"><strong>🔐 Segurança e Experiência do Usuário</strong></td>
+</tr>
+
+<tr>
+    <td>66</td>
+    <td>Ajustes na autenticação JWT e controle de acesso por perfil</td>
+    <td>3</td>
+    <td>🟡 Média</td>
+    <td>Israel</td>
+    <td>✅</td>
+    <td>RF09</td>
+</tr>
+
+<tr>
+    <td>67</td>
+    <td>Melhorias na tela de login e tratamento de erros de autenticação</td>
+    <td>2</td>
+    <td>🟡 Média</td>
+    <td>Rainan</td>
+    <td>✅</td>
+    <td>RF09, RF11</td>
+</tr>
+
+<tr>
+    <td>68</td>
+    <td>Correções de interface e refinamento da experiência do usuário</td>
+    <td>2</td>
+    <td>🟢 Baixa</td>
+    <td>Thales</td>
+    <td>✅</td>
+    <td>RNF01, RNF02</td>
+</tr>
+
 </table>
 
 <h4 id="burndownsprint3">📉 Burndown Sprint 3</h4>
@@ -1041,3 +1107,8 @@ docker-compose up --build
 
 <h3 id="classes">Diagrama de classes</h3>
 <p><img src="./docs/sprint2/DiagramaDeClasses.png" alt="Diagrama de Classes"></p>
+
+<h3 id="sequencia">Diagramas de sequência</h3>
+<p><img src="./docs/sprint3/DiagramaSequencia1.jpeg" alt="Diagrama de Sequência"></p>
+
+<p><img src="./docs/sprint3/DiagramaSequencia2.jpeg" alt="Diagrama de Sequência"></p>
